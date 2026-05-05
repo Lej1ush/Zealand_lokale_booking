@@ -1,6 +1,15 @@
-﻿namespace Zealand_lokale_booking.Services.UserServ
+﻿using Zealand_lokale_booking.Models;
+
+namespace Zealand_lokale_booking.Services.UserServ
 {
-    public class IDbUserService
+    public interface IDbUserService
     {
+        Task<List<User>> GetAllUsersAsync();
+        Task<User?> LoginAsync(string email, string password);
+        Task<List<User>> GetUsersByRoleAsync(RoleType role);
+
+        Task CreateUserAsync(User user);
+        Task UpdateUserAsync(User user);
+        Task DeleteUserAsync(int id);
     }
 }

@@ -1,4 +1,127 @@
 ﻿@page
+@using Zealand_lokale_booking.Models
 @model Zealand_lokale_booking.Pages.UserPage.GetAllUsersModel
 @{
 }
+
+<h2 class="mb-3">
+    @if (User.IsInRole("Admin"))
+    {
+        <text>Alle brugere</text>
+    }
+    else if (User.IsInRole("Teacher"))
+    {
+        <text>Studerende</text>
+    }
+</h2>
+<div class="row align-items-end mb-3">
+
+
+    <!-- SEARCH BY NAME -->
+    <div class="col-4">
+        <form method="post">
+            <div class="input-group">
+                <input asp-for="SearchString" class="form-control" placeholder="Search by name" />
+                <button type="submit" asp-page-handler="NameSearch" class="btn btn-primary">
+                    Search
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- SEARCH BY ID -->
+    <div class="col-4">
+        <form method="post">
+            <div class="input-group">
+                <input asp-for="SearchId" class="form-control" placeholder="Search by ID" />
+                <button type="submit" asp-page-handler="IdSearch" class="btn btn-secondary">
+                    Find
+                </button>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+<table class="table table-hover align-middle text-center shadow-sm">
+
+    <thead class="table-dark">
+        <tr>
+            <th>
+                <div class="d-flex justify-content-between">
+                    <span>Id</span>
+                    <span class="ms-1">
+                        <a asp-page-handler="SortById" class="text-white text-decoration-none small">↑</a>
+                        <a asp-page-handler="SortByIdDesc" class="text-white text-decoration-none small ms-1">↓</a>
+                    </span>
+                </div>
+            </th>
+
+            <th>
+                <div class="d-flex justify-content-between">
+                    <span>Navn</span>
+                    <span class="ms-1">
+                        <a asp-page-handler="SortByName" class="text-white text-decoration-none small">↑</a>
+                        <a asp-page-handler="SortByNameDesc" class="text-white text-decoration-none small ms-1">↓</a>
+                    </span>
+                </div>
+            </th>
+            <th>Email</th>
+            <th>Rolle</th>
+            <th>Valg</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @if (Model.Users != null && Model.Users.Any())
+        {
+            foreach (var user in Model.Users)
+            {
+                <tr>
+                    <td>@user.UserId</td>
+                    <td>@user.Name</td>
+                    <td>@user.Email</td>
+                    <td>
+                        <span class="badge
+                                    @(user.Role == RoleType.Admin ? "bg-danger" :
+                                                            user.Role == RoleType.Teacher ? "bg-primary" :
+                                                            "bg-success")">
+                    @user.Role
+                </span>
+            </td>
+
+                    <td>
+                        <div class="d-flex flex-column flex-md-row gap-2 justify-content-center">
+
+                            <a class="btn btn-warning btn-sm"
+                               asp-page="/UserPage/EditUser"
+                               asp-route-id="@user.UserId">
+                                ✏️ Rediger
+                            </a>
+
+                            <a class="btn btn-danger btn-sm"
+                               asp-page="/UserPage/DeleteUser"
+                               asp-route-id="@user.UserId">
+                                🗑 Slet
+                            </a>
+
+                        </div>
+                    </td>
+                </tr>
+                }
+        }
+        else
+        {
+            <tr>
+                <td colspan="5">Ingen brugere fundet</td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+<div class="mt-3">
+    <a asp-page="/LogInPage/LogIn" class="btn btn-secondary">
+        ← Tilbage
+    </a>
+    </div>

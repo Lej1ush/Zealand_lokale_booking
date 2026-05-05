@@ -2,3 +2,53 @@
 @model Zealand_lokale_booking.Pages.UserPage.EditUserModel
 @{
 }
+<div class="container mt-4" style="max-width: 500px;">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Rediger bruger</h5>
+        </div>
+
+        <div class="card-body">
+            <form method="post">
+
+                <input type="hidden" asp-for="User.UserId" />
+
+                <!-- Navn -->
+                <div class="mb-3">
+                    <label class="form-label">Navn</label>
+                    <input asp-for="User.Name" class="form-control" />
+                </div>
+
+                <!-- Email -->
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input asp-for="User.Email" class="form-control" />
+                </div>
+
+                <!-- Adgangskode -->
+                <div class="mb-3">
+                    <label class="form-label">Adgangskode</label>
+                    <input asp-for="User.Password" class="form-control" />
+                </div>
+
+                <!-- Rolle (kun visning) -->
+                <div class="mb-3">
+                    <label class="form-label">Rolle</label>
+                    <input class="form-control" value="@Model.User.Role" disabled />
+                </div>
+
+                <!-- Knapper -->
+                <div class="d-flex justify-content-between">
+                    <a asp-page="/UserPage/GetAllUsers" class="btn btn-secondary">
+                        Annuller
+                    </a>
+
+                    <button type="submit" class="btn btn-success">
+                        Gem ændringer
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
