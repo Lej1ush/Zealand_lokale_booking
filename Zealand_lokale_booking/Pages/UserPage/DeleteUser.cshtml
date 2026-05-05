@@ -2,3 +2,44 @@
 @model Zealand_lokale_booking.Pages.UserPage.DeleteUserModel
 @{
 }
+
+<div class="container mt-5" style="max-width: 500px;">
+    <div class="card shadow-sm border-danger">
+
+        <div class="card-header bg-danger text-white">
+            <h5>⚠️ Slet bruger</h5>
+        </div>
+
+        <div class="card-body">
+
+            <p>Er du sikker på, at du vil slette denne bruger?</p>
+
+            <ul class="list-group mb-3">
+                <li class="list-group-item">
+                    <strong>Navn:</strong> @Model.User.Name
+                </li>
+                <li class="list-group-item">
+                    <strong>Email:</strong> @Model.User.Email
+                </li>
+                <li class="list-group-item">
+                    <strong>Rolle:</strong> @Model.User.Role
+                </li>
+            </ul>
+
+            <form method="post">
+                <input type="hidden" asp-for="User.UserId" />
+
+                <div class="d-flex justify-content-between">
+                    <a asp-page="/UserPage/GetAllUsers" class="btn btn-secondary">
+                        Annuller
+                    </a>
+
+                    <button type="submit" class="btn btn-danger">
+                        Slet
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+    </div>

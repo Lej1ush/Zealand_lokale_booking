@@ -1,0 +1,26 @@
+[
+  {
+    
+    "Name": "Sonaa",
+    "Email": "sad004@edu.zealand.dk",
+    "Password": "AQAAAAIAAYagAAAAEF69Et2gCtbupiWnaTJP/Wih36OmsDuas2MsIjPMSKRYUwlu6lOtKb94wTX8N0HVOw==",
+    "RoleId": 0,
+    "Role": 0
+  },
+  {
+    
+    "Name": "John",
+    "Email": "john@zealand.dk",
+    "Password": "AQAAAAIAAYagAAAAENRvWq7hANX8AceIOPLjpl1nw68BENxv7cCMVd2xe9OC7n8d4CL4zryz6H6kPEZqoA==",
+    "RoleId": 0,
+    "Role": 1
+  },
+  {
+   
+    "Name": "Admin",
+    "Email": "admin@gmail.com",
+    "Password": "AQAAAAIAAYagAAAAEGKhHsZanTwryINM3qA52JqhsZ522gBO8D6/svmnUaXk0tK/jOywDS81I5r8IT24Iw==",
+    "RoleId": 0,
+    "Role": 2
+  }
+]
