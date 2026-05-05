@@ -2,34 +2,42 @@
 @model Zealand_lokale_booking.Pages.LogInPage.LogInFormModel
 @{
 }
+<div class="login-wrapper">
 
-<div class="container mt-5" style="max-width:400px;">
+    <div class="login-box">
 
-    <div class="text-danger mb-2">
-        @Model.Message
+        <h2 class="text-center mb-4">Log ind</h2>
+
+        <div class="text-danger mb-3 text-center">
+            @Model.Message
+        </div>
+
+        <form method="post">
+
+            <div class="form-group mb-3">
+                <label>Email</label>
+                <input asp-for="Email" class="form-control" />
+            </div>
+
+            <div class="form-group mb-4">
+                <label>Password</label>
+                <input asp-for="Password" type="password" class="form-control" />
+            </div>
+
+            <button class="btn btn-warning w-100 mb-3">
+                Log ind
+            </button>
+
+            <div class="text-center">
+                <a asp-page="/Index" class="btn btn-outline-dark">
+                    Tilbage
+                </a>
+            </div>
+
+        </form>
+
     </div>
 
-    <form method="post">
-
-        <div class="form-group mb-3">
-            <label>Email</label>
-            <input asp-for="Email" class="form-control" />
-        </div>
-
-        <div class="form-group mb-3">
-            <label>Password</label>
-            <input asp-for="Password" type="password" class="form-control" />
-        </div>
-
-        <button class="btn btn-primary w-100">Log in</button>
-
-    </form>
-
-</div>
-<div class="back-container">
-    <a asp-page="/LogInPage/LogIn" class="btn-back">
-        Tilbage
-    </a>
 </div>
 
 @section Scripts {
