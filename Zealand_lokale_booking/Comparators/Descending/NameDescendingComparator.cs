@@ -9,9 +9,8 @@ namespace Zealand_lokale_booking.Comparators.Descending
             if (x == null || y == null)
                 return 0;
 
-            return string.Compare( y.Name, x.Name,
-                StringComparison.OrdinalIgnoreCase
-            );
+            return string.Compare( y.Name, x.Name);
         }
     }
 }
+
