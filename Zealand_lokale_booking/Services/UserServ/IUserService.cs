@@ -4,12 +4,16 @@ namespace Zealand_lokale_booking.Services.UserServ
 {
     public interface IUserService
     {
-        List<User> GetAllUsers();
-        User Login(string email, string password);
-        List<User> GetUsersByRole(RoleType role);
+        Task<List<User>> GetAllUsersAsync();
 
-        void CreateUser(User user);
-        void UpdateUser(User user);
-        void DeleteUser(int id);
+        Task<User?> LoginAsync(string email, string password);
+
+        Task<List<User>> GetUsersByRoleAsync(int roleId);
+
+        Task CreateUserAsync(User user);
+
+        Task UpdateUserAsync(User user);
+
+        Task DeleteUserAsync(int id);
     }
 }

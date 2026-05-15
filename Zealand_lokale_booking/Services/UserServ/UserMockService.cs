@@ -4,11 +4,10 @@ using Zealand_lokale_booking.Models;
 
 namespace Zealand_lokale_booking.Services.UserServ
 {
-    public class UserMockService : IUserService
+    public class UserMockService
     {
 
-        private static List<User> _users = UserMock.GetMockUsers();
-
+        private static List<User> _users = UserMock.GetUsers();
         public List<User> GetAllUsers()
         {
             return _users;
@@ -23,29 +22,15 @@ namespace Zealand_lokale_booking.Services.UserServ
 
         public User Login(string email, string password)
         {
-            var user = _users.FirstOrDefault(u => u.Email == email);
-
-            if (user == null)
-                return null;
-
-            var passwordHasher = new PasswordHasher<string>();
-
-            var result = passwordHasher.VerifyHashedPassword(
-                null,
-                user.Password,
-                password
-            );
-
-            if (result == PasswordVerificationResult.Success)
-                return user;
-
-            return null;
+            return _users.FirstOrDefault(u =>
+                u.Email == email &&
+                u.Password == password);
         }
 
-        public List<User> GetUsersByRole(RoleType role)
+        public List<User> GetUsersByRole(int roleId)
         {
             return _users
-                .Where(u => u.Role == role)
+                .Where(u => u.RoleId == roleId)
                 .ToList();
         }
 
@@ -65,7 +50,7 @@ namespace Zealand_lokale_booking.Services.UserServ
                 existing.Name = user.Name;
                 existing.Email = user.Email;
                 existing.Password = user.Password;
-                existing.Role = user.Role;
+                existing.RoleId = user.RoleId;
             }
         }
 

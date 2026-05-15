@@ -13,6 +13,6 @@ namespace Zealand_lokale_booking.Repositories.UserRep
         Task DeleteAsync(int id);
 
         Task SaveAsync();
-        Task<List<User>> GetByRoleAsync(RoleType role);
+        Task<List<User>> GetByRoleAsync(int roleId);
     }
 }

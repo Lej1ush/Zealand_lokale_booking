@@ -1,3 +1,5 @@
+using Zealand_lokale_booking.Models;
+
 namespace Zealand_lokale_booking.MockData;
 
 public class TimeSlotMock
@@ -6,10 +8,33 @@ public class TimeSlotMock
     {
         return new List<TimeSlot>
         {
-            new TimeSlot(1, "08:00", "10:00"),
-            new TimeSlot(2, "10:00", "12:00"),
-            new TimeSlot(3, "12:00", "14:00"),
-            new TimeSlot(4, "14:00", "16:00")
+            new TimeSlot
+            {
+                TimeSlotId = 1,
+                StartTime = "08:00",
+                EndTime = "10:00"
+            },
+
+            new TimeSlot
+            {
+                TimeSlotId = 2,
+                StartTime = "10:00",
+                EndTime = "12:00"
+            },
+
+            new TimeSlot
+            {
+                TimeSlotId = 3,
+                StartTime = "12:00",
+                EndTime = "14:00"
+            },
+
+            new TimeSlot
+            {
+                TimeSlotId = 4,
+                StartTime = "14:00",
+                EndTime = "16:00"
+            }
         };
     }
 }

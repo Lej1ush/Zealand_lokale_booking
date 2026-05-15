@@ -5,8 +5,9 @@ using Zealand_lokale_booking.Repositories.UserRep;
 
 namespace Zealand_lokale_booking.Services.UserServ
 {
-    public class DbUserService : IDbUserService
+    public class DbUserService : IUserService
     {
+        
 
         private readonly IUserRepository _repo;
         //private readonly JsonFileService _json;
@@ -42,9 +43,9 @@ namespace Zealand_lokale_booking.Services.UserServ
         }
 
         //  Get users by role
-        public async Task<List<User>> GetUsersByRoleAsync(RoleType role)
+        public async Task<List<User>> GetUsersByRoleAsync(int roleId)
         {
-            return await _repo.GetByRoleAsync(role);
+            return await _repo.GetByRoleAsync(roleId);
         }
         //  Login
         public async Task<User?> LoginAsync(string email, string password)
@@ -54,15 +55,10 @@ namespace Zealand_lokale_booking.Services.UserServ
             if (user == null)
                 return null;
 
-            var hasher = new PasswordHasher<string>();
+            if (user.Password == password)
+                return user;
 
-            var result = hasher.VerifyHashedPassword(
-                null,
-                user.Password,
-                password
-            );
-
-            return result == PasswordVerificationResult.Success ? user : null;
+            return null;
         }
         //  Create user 
         public async Task CreateUserAsync(User user)

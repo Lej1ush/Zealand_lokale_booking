@@ -86,15 +86,16 @@ namespace Zealand_lokale_booking.Pages.UserPage
                 return Page();
 
             // Student
-            if (User.Role == RoleType.Student &&
+            // Student
+            if (User.RoleId == 1 &&
                 !User.Email.ToLower().EndsWith("@edu.zealand.dk"))
             {
                 ModelState.AddModelError("", "Studerende skal have en email der slutter med @edu.zealand.dk");
                 return Page();
             }
 
-            // Teacher
-            if (User.Role == RoleType.Teacher &&
+// Teacher
+            if (User.RoleId == 2 &&
                 !User.Email.ToLower().EndsWith("@zealand.dk"))
             {
                 ModelState.AddModelError("", "Undervisere skal have en email der slutter med @zealand.dk");

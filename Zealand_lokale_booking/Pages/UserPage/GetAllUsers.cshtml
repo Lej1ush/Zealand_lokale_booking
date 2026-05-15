@@ -84,12 +84,11 @@
                     <td>@user.Name</td>
                         <td class="d-none d-md-table-cell">@user.Email</td>
                     <td>
-                        <span class="badge
-                                    @(user.Role == RoleType.Admin ? "bg-danger" :
-                                                            user.Role == RoleType.Teacher ? "bg-primary" :
-                                                            "bg-success")">
-                    @user.Role
-                </span>
+                        <span class="badge @(user.RoleId == 3 ? "bg-danger" :
+                                           user.RoleId == 2 ? "bg-primary" :
+                                           "bg-success")">
+                            @user.RoleId
+                        </span>
             </td>
 
                     <td>

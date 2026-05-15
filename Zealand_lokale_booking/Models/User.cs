@@ -44,44 +44,68 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Zealand_lokale_booking.Models;
 
-namespace Zealand_lokale_booking.Models
+public class User
+
 {
-    public class User
+
+    [Key]
+
+    public int UserId { get; set; }
+
+
+    [Required]
+
+    public string Name { get; set; } = "";
+
+
+    [Required]
+
+    [EmailAddress]
+
+    public string Email { get; set; } = "";
+
+
+    [Required]
+
+    public string Password { get; set; } = "";
+
+
+    [Required]
+
+    public int RoleId { get; set; }
+
+
+    [ForeignKey(nameof(RoleId))]
+
+    public Role Role { get; set; }
+
+
+// Navigation property
+
+    public ICollection<UserCourse> UserCourses { get; set; }
+
+        = new List<UserCourse>();
+
+
+
+    public User() { }
+
+
+    public User(string name, string email, string password, int roleId)
+
     {
 
+        Name = name;
 
-        [Key]
-        public int UserId { get; set; }
+        Email = email;
 
-        [Required]
-        public string Name { get; set; } = "";
+        Password = password;
 
-        [Required]
-        [EmailAddress]
-        public string Email { get; set; } = "";
+        RoleId = roleId;
 
-        [Required]
-        public string Password { get; set; } = "";
-
-        [Required]
-        public int RoleId { get; set; }
-
-        [ForeignKey("RoleId")]
-
-        public RoleType Role { get; set; }
-
-
-        public User(int userId, string name, string email, string password, RoleType role)
-        {
-            UserId = userId;
-            Name = name;
-            Email = email;
-            Password = password;
-            Role = role;
-        }
-
-        public User()
-        {
-        }
     }
 }
+
+
+
+

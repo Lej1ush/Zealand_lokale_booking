@@ -4,7 +4,7 @@ using Zealand_lokale_booking.Models;
 
 namespace Zealand_lokale_booking.Services.UserServ
 {
-    public class JsonUserService : IUserService
+    public class JsonUserService
     {
 
         private readonly JsonFileService _json;
@@ -17,7 +17,7 @@ namespace Zealand_lokale_booking.Services.UserServ
 
             if (!users.Any())                              
             {
-                var mockUsers = UserMock.GetMockUsers();
+                var mockUsers = UserMock.GetUsers();
                 _json.SaveAll(mockUsers);
             }           
         }
@@ -27,10 +27,10 @@ namespace Zealand_lokale_booking.Services.UserServ
             return _json.GetAll();                                // GetAll(): Method from JsonFileService 
         }
 
-        public List<User> GetUsersByRole(RoleType role)
+        public List<User> GetUsersByRole(int roleId)
         {
             return _json.GetAll()
-                .Where(u => u.Role == role)
+                .Where(u => u.RoleId == roleId)
                 .ToList();
         }
 
@@ -92,7 +92,7 @@ namespace Zealand_lokale_booking.Services.UserServ
                     var passwordHasher = new PasswordHasher<string>();
                     existing.Password = passwordHasher.HashPassword(null, user.Password);
                 }
-                existing.Role = user.Role;
+                existing.RoleId = user.RoleId;
             }
 
             _json.SaveAll(users);

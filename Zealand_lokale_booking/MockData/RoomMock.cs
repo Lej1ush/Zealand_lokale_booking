@@ -1,14 +1,45 @@
+using Zealand_lokale_booking.Models;
+
 namespace Zealand_lokale_booking.MockData;
 
-public static class MockData
+public class RoomMock
 {
     public static List<Room> GetRooms()
     {
         return new List<Room>
         {
-            new Room(1, "A101", 30),
-            new Room(2, "B202", 10),
-            new Room(3, "C303", 50)
+            new Room
+            {
+                RoomId = 1,
+                RoomName = "A101",
+                Capacity = 30,
+                Floor = 1,
+                BuildingId = 1,
+                RoomTypeId = 1,
+                SmartBoardId = 1
+            },
+
+            new Room
+            {
+                RoomId = 2,
+                RoomName = "B202",
+                Capacity = 10,
+                Floor = 2,
+                BuildingId = 1,
+                RoomTypeId = 2,
+                SmartBoardId = 2
+            },
+
+            new Room
+            {
+                RoomId = 3,
+                RoomName = "C303",
+                Capacity = 50,
+                Floor = 3,
+                BuildingId = 2,
+                RoomTypeId = 3,
+                SmartBoardId = 1
+            }
         };
     }
 }

@@ -1,31 +1,36 @@
+using Zealand_lokale_booking.Models;
+
 namespace Zealand_lokale_booking.MockData;
 
+public class BookingMock
 {
-    public class BookingMock
+    public static List<Booking> GetBookings()
     {
-        public static List<Booking> GetBookings()
+        return new List<Booking>
         {
-            return new List<Booking>
+            new Booking
             {
-                new Booking
-                {
-                    BookingId = 1,
-                    RoomId = 101,
-                    UserId = 1,
-                    TimeSlot = new TimeSlot(1, "08:00", "10:00"),
-                    Date = DateTime.Today,
-                    Status = true
-                },
-                new Booking
-                {
-                    BookingId = 2,
-                    RoomId = 102,
-                    UserId = 2,
-                    TimeSlot = new TimeSlot(2, "10:00", "12:00"),
-                    Date = DateTime.Today,
-                    Status = true
-                }
-            };
-        }
+                BookingId = 1,
+                UserId = 1,
+                RoomId = 101,
+                BookingDate = DateTime.Today,
+                StartTime = DateTime.Today.AddHours(8),
+                EndTime = DateTime.Today.AddHours(10),
+                Status = true,
+                TimeSlotId = 1
+            },
+
+            new Booking
+            {
+                BookingId = 2,
+                UserId = 2,
+                RoomId = 102,
+                BookingDate = DateTime.Today,
+                StartTime = DateTime.Today.AddHours(10),
+                EndTime = DateTime.Today.AddHours(12),
+                Status = true,
+                TimeSlotId = 2
+            }
+        };
     }
 }

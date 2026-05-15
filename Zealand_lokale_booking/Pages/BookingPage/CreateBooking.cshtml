@@ -1,0 +1,61 @@
+@page
+@model Zealand_lokale_booking.Pages.BookingPage.CreateBookingModel
+
+<div class="container mt-5">
+    <div class="card shadow border-0">
+        
+        <div class="card-header bg-dark text-white">
+            <h3>Opret booking</h3>
+        </div>
+
+        <div class="card-body">
+
+            @if (!string.IsNullOrEmpty(Model.Message))
+            {
+                <div class="alert alert-danger">
+                    @Model.Message
+                </div>
+            }
+
+            <form method="post">
+
+                <div class="mb-3">
+                    <label class="form-label">Bruger ID</label>
+                    <input asp-for="UserId" class="form-control"/>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Vælg lokale</label>
+
+                    <select asp-for="RoomId" class="form-control">
+                        <option value="">-- Vælg lokale --</option>
+
+                        @foreach (var room in Model.Rooms)
+                        {
+                            <option value="@room.RoomId">
+                                @room.RoomName - kapacitet: @room.Capacity
+                            </option>
+                        }
+
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Start tidspunkt</label>
+                    <input asp-for="StartTime" type="datetime-local" class="form-control"/>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Slut tidspunkt</label>
+                    <input asp-for="EndTime" type="datetime-local" class="form-control"/>
+                </div>
+
+                <button type="submit" class="btn btn-success">
+                    Opret booking
+                </button>
+
+            </form>
+
+        </div>
+    </div>
+</div>

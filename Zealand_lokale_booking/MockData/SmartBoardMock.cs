@@ -1,13 +1,26 @@
+using Zealand_lokale_booking.Models;
+
 namespace Zealand_lokale_booking.MockData;
 
-public class SmartboardMock
+public class SmartBoardMock
 {
-    public static List<Smartboard> GetSmartboards()
+    public static List<SmartBoard> GetSmartBoards()
     {
-        return new List<Smartboard>
+        return new List<SmartBoard>
         {
-            new Smartboard { SmartboardId = 1, SmartboardName = "SB1", Availability = true },
-            new Smartboard { SmartboardId = 2, SmartboardName = "SB2", Availability = false }
+            new SmartBoard
+            {
+                SmartBoardId = 1,
+                SmartBoardName = "SB1",
+                Availability = true
+            },
+
+            new SmartBoard
+            {
+                SmartBoardId = 2,
+                SmartBoardName = "SB2",
+                Availability = false
+            }
         };
     }
 }

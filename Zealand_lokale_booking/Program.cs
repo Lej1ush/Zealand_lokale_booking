@@ -2,36 +2,53 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Zealand_lokale_booking.EFDbContext;
-using Zealand_lokale_booking.Repositories.UserRep;
+using Zealand_lokale_booking.Repositories;
 using Zealand_lokale_booking.Services;
 using Zealand_lokale_booking.Services.UserServ;
+using Zealand_lokale_booking.Repositories.UserRep;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 
-
-
-
 /*builder.Services.AddSingleton<IUserService, UserMockService>();   */              //mock
 
 //builder.Services.AddScoped<JsonFileService>();                                      //json
 //builder.Services.AddScoped<IUserService, JsonUserService>();                   //json
 
-
 //json-db
 //builder.Services.AddScoped<DataSeeder>();
 //builder.Services.AddScoped<JsonFileService>();
 //builder.Services.AddScoped<JsonUserService>();
+// User service
+//builder.Services.AddScoped<IUserRepository, UserRepository>();// 
+// builder.Services.AddScoped<IUserRepository, UserRepository>();
+// builder.Services.AddScoped<IUserService, DbUserService>();
+//builder.Services.AddSingleton<IUserService, UserMockService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IDbUserService, DbUserService>();
+builder.Services.AddScoped<IUserService, DbUserService>();
+
+// Booking service
+builder.Services.AddSingleton<BookingRepository>();
+builder.Services.AddScoped<BookingService>();
+
+// Room service
+builder.Services.AddSingleton<RoomRepository>();
+builder.Services.AddScoped<RoomService>();
 
 
 builder.Services.AddDbContext<UserDbContext>(options =>
-    options.UseSqlServer(
-        builder.Configuration.GetConnectionString("DefaultConnection")
-    ));
+{
+    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+    options.UseMySql(
+        connectionString,
+        ServerVersion.AutoDetect(connectionString)
+    );
+});
+
 
 
 builder.Services.Configure<CookiePolicyOptions>(options => {

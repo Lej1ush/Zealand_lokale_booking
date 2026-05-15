@@ -62,11 +62,11 @@ namespace Zealand_lokale_booking.Repositories.UserRep
                 _context.Users.Remove(user);
             }
         }
-
-        public async Task<List<User>> GetByRoleAsync(RoleType role)
+        
+        public async Task<List<User>> GetByRoleAsync(int roleId)
         {
             return await _context.Users
-                .Where(u => u.Role == role)
+                .Where(u => u.RoleId == roleId)
                 .ToListAsync();
         }
     }

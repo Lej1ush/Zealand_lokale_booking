@@ -1,99 +1,3 @@
-//using Microsoft.AspNetCore.Mvc;
-//using Microsoft.AspNetCore.Mvc.RazorPages;
-//using Zealand_lokale_booking.Comparators.Ascending;
-//using Zealand_lokale_booking.Comparators.Descending;
-//using Zealand_lokale_booking.Models;
-//using Zealand_lokale_booking.Services.UserServ;
-
-//namespace Zealand_lokale_booking.Pages.UserPage
-//{
-//    public class GetAllUsersModel : PageModel
-//    {
-//        private readonly IUserService _userService;
-
-//        public List<User> Users { get; set; } = new List<User>();
-
-//        public GetAllUsersModel(IUserService userService)
-//        {
-//            _userService = userService;
-//        }
-
-//        [BindProperty]
-//        public string SearchString { get; set; }
-
-//        [BindProperty]
-//        public int? SearchId { get; set; }
-//        [BindProperty(SupportsGet = true)]
-//        public RoleType? Role { get; set; }
-//        public void OnGet()
-//        {
-//            if (Role.HasValue)
-//            {
-//                Users = _userService.GetUsersByRole(Role.Value);
-//            }
-//            else
-//            {
-//                Users = _userService.GetAllUsers();
-//            }
-//        }
-
-//        public IActionResult OnPostNameSearch()
-//        {
-//            Users = _userService.GetAllUsers()
-//                .Where(u => u.Name != null &&
-//                            !string.IsNullOrEmpty(SearchString) &&
-//                            u.Name.ToLower().Contains(SearchString.ToLower()))
-//                .ToList();
-
-//            return Page();
-//        }
-//        public IActionResult OnPostIdSearch()
-//        {
-//            if (SearchId.HasValue)
-//            {
-//                Users = _userService.GetAllUsers()
-//                    .Where(u => u.UserId == SearchId.Value)
-//                    .ToList();
-//            }
-//            else
-//            {
-//                Users = _userService.GetAllUsers();
-//            }
-
-//            return Page();
-//        }
-
-//        public IActionResult OnGetSortById()
-//        {
-//            Users = _userService.GetAllUsers();
-//            Users.Sort(new IdAscendingComparator());
-//            return Page();
-//        }
-//        public IActionResult OnGetSortByIdDesc()
-//        {
-//            Users = _userService.GetAllUsers();
-//            Users.Sort(new IdDescendingComparator());
-//            return Page();
-//        }
-
-//        public IActionResult OnGetSortByName()
-//        {
-//            Users = _userService.GetAllUsers();
-//            Users.Sort(new NameAscendingComparator());
-//            return Page();
-//        }
-
-//        public IActionResult OnGetSortByNameDesc()
-//        {
-//            Users = _userService.GetAllUsers();
-//            Users.Sort(new NameDescendingComparator());
-//            return Page();
-//        }
-
-//    }
-//}
-
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Zealand_lokale_booking.Comparators.Ascending;
@@ -103,18 +7,11 @@ using Zealand_lokale_booking.Services.UserServ;
 
 namespace Zealand_lokale_booking.Pages.UserPage
 {
-
- 
     public class GetAllUsersModel : PageModel
     {
-        private readonly IDbUserService _userService;
+        private readonly IUserService _userService;
 
         public List<User> Users { get; set; } = new List<User>();
-
-        public GetAllUsersModel(IDbUserService userService)
-        {
-            _userService = userService;
-        }
 
         [BindProperty]
         public string SearchString { get; set; }
@@ -125,11 +22,16 @@ namespace Zealand_lokale_booking.Pages.UserPage
         [BindProperty(SupportsGet = true)]
         public RoleType? Role { get; set; }
 
-        public async Task OnGetAsync()
+        public GetAllUsersModel(IUserService userService)
+        {
+            _userService = userService;
+        }
+
+        public async Task OnGet()
         {
             if (Role.HasValue)
             {
-                Users = await _userService.GetUsersByRoleAsync(Role.Value);
+                Users = await _userService.GetUsersByRoleAsync((int)Role.Value);
             }
             else
             {
@@ -137,7 +39,7 @@ namespace Zealand_lokale_booking.Pages.UserPage
             }
         }
 
-        public async Task<IActionResult> OnPostNameSearchAsync()
+        public async Task<IActionResult> OnPostNameSearch()
         {
             var allUsers = await _userService.GetAllUsersAsync();
 
@@ -150,7 +52,7 @@ namespace Zealand_lokale_booking.Pages.UserPage
             return Page();
         }
 
-        public async Task<IActionResult> OnPostIdSearchAsync()
+        public async Task<IActionResult> OnPostIdSearch()
         {
             var allUsers = await _userService.GetAllUsersAsync();
 
@@ -168,31 +70,35 @@ namespace Zealand_lokale_booking.Pages.UserPage
             return Page();
         }
 
-        public async Task<IActionResult> OnGetSortByIdAsync()
+        public async Task<IActionResult> OnGetSortById()
         {
             Users = await _userService.GetAllUsersAsync();
             Users.Sort(new IdAscendingComparator());
+
             return Page();
         }
 
-        public async Task<IActionResult> OnGetSortByIdDescAsync()
+        public async Task<IActionResult> OnGetSortByIdDesc()
         {
             Users = await _userService.GetAllUsersAsync();
             Users.Sort(new IdDescendingComparator());
+
             return Page();
         }
 
-        public async Task<IActionResult> OnGetSortByNameAsync()
+        public async Task<IActionResult> OnGetSortByName()
         {
             Users = await _userService.GetAllUsersAsync();
             Users.Sort(new NameAscendingComparator());
+
             return Page();
         }
 
-        public async Task<IActionResult> OnGetSortByNameDescAsync()
+        public async Task<IActionResult> OnGetSortByNameDesc()
         {
             Users = await _userService.GetAllUsersAsync();
             Users.Sort(new NameDescendingComparator());
+
             return Page();
         }
     }

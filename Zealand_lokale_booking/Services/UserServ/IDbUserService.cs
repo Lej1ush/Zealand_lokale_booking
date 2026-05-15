@@ -6,7 +6,7 @@ namespace Zealand_lokale_booking.Services.UserServ
     {
         Task<List<User>> GetAllUsersAsync();
         Task<User?> LoginAsync(string email, string password);
-        Task<List<User>> GetUsersByRoleAsync(RoleType role);
+        Task<List<User>> GetUsersByRoleAsync(int roleId);
 
         Task CreateUserAsync(User user);
         Task UpdateUserAsync(User user);

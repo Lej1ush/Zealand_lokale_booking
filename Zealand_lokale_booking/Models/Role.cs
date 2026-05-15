@@ -1,30 +1,26 @@
 ﻿using System.ComponentModel.DataAnnotations;
+namespace Zealand_lokale_booking.Models;
 
-namespace Zealand_lokale_booking.Models
+public class Role
 {
-    public class Role
+    public int RoleId { get; set; }
+    public string RoleName { get; set; }
+
+    public Role()
     {
-        [Key]
-        public int RoleId { get; set; }
+    }
 
-        [Required]
-        public string Name { get; set; } = "";
+    public Role(int roleId, string roleName)
+    {
+        RoleId = roleId;
+        RoleName = roleName;
+    }
 
-
-        public List<User> Users { get; set; } = new List<User>();
-
-        // Default constructor
-        public Role() { }
-
-        // Constructor me parametra
-        public Role(int roleId, string name)
-        {
-            RoleId = roleId;
-            Name = name;
-        }
+    public override string ToString()
+    {
+        return RoleName;
     }
 }
-
 
 //dette klasse bruges kun  i DB 
 

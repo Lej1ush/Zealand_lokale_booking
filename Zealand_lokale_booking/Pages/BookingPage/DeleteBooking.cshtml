@@ -1,0 +1,101 @@
+@page "{id:int}"
+@model Zealand_lokale_booking.Pages.BookingPage.DeleteBookingModel
+
+<div class="container mt-5 d-flex justify-content-center">
+
+    <div class="card shadow-lg border-0 rounded-4" style="max-width: 700px; width: 100%;">
+
+        <div class="card-header bg-danger text-white rounded-top-4 p-4">
+            <h3 class="mb-0">Bekræft sletning</h3>
+            <p class="mb-0 mt-2">Du er ved at slette en booking fra systemet.</p>
+        </div>
+
+        <div class="card-body p-4">
+
+            @if (Model.Booking != null)
+            {
+                <div class="alert alert-warning rounded-3">
+                    Er du sikker på, at du vil slette denne booking? Handlingen kan ikke fortrydes.
+                </div>
+
+                <div class="border rounded-4 p-4 bg-light mb-4">
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <strong>Booking ID</strong>
+                            <p class="mb-0">@Model.Booking.BookingId</p>
+                        </div>
+
+                        <div class="col-md-6">
+                            <strong>Status</strong>
+                            <p class="mb-0">
+                                @if (Model.Booking.Status)
+                                {
+                                    <span class="badge bg-success">Aktiv</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary">Aflyst</span>
+                                }
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <strong>Bruger ID</strong>
+                            <p class="mb-0">@Model.Booking.UserId</p>
+                        </div>
+
+                        <div class="col-md-6">
+                            <strong>Lokale ID</strong>
+                            <p class="mb-0">@Model.Booking.RoomId</p>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <strong>Dato</strong>
+                            <p class="mb-0">@Model.Booking.BookingDate.ToShortDateString()</p>
+                        </div>
+
+                        <div class="col-md-6">
+                            <strong>Tidspunkt</strong>
+                            <p class="mb-0">
+                                @Model.Booking.StartTime.ToString("HH:mm") - @Model.Booking.EndTime.ToString("HH:mm")
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <form method="post" class="d-flex gap-3">
+
+                    <button type="submit" class="btn btn-danger px-4">
+                        Ja, slet booking
+                    </button>
+
+                    <a asp-page="/BookingPage/GetAllBookings"
+                       class="btn btn-outline-secondary px-4">
+                        Annuller
+                    </a>
+
+                </form>
+            }
+            else
+            {
+                <div class="alert alert-danger">
+                    Bookingen blev ikke fundet.
+                </div>
+
+                <a asp-page="/BookingPage/GetAllBookings"
+                   class="btn btn-dark">
+                    Tilbage til bookinger
+                </a>
+            }
+
+        </div>
+
+    </div>
+
+</div>

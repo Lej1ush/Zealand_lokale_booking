@@ -1,0 +1,56 @@
+@page
+@model Zealand_lokale_booking.Pages.Roompage.GetAllRoomsModel
+
+<div class="container mt-5">
+
+    <div class="card shadow-sm border-0">
+
+        <div class="card-header bg-dark text-white">
+            <h2>Alle lokaler</h2>
+        </div>
+
+        <div class="card-body">
+
+            @if (Model.Rooms.Any())
+            {
+                <table class="table table-hover align-middle text-center">
+
+                    <thead class="table-light">
+                    <tr>
+                            <th>Lokale ID</th>
+                            <th>Lokalenavn</th>
+                            <th>Kapacitet</th>
+                            <th>Etage</th>
+                            <th>Bygning ID</th>
+                            <th>Lokaletype ID</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    @foreach (var room in Model.Rooms)
+                    {
+                        <tr>
+                                <td>@room.RoomId</td>
+                                <td>@room.RoomName</td>
+                                <td>@room.Capacity</td>
+                                <td>@room.Floor</td>
+                                <td>@room.BuildingId</td>
+                                <td>@room.RoomTypeId</td>
+                            </tr>
+                    }
+
+                    </tbody>
+
+                </table>
+            }
+            else
+            {
+                <p>Der findes ingen lokaler endnu.</p>
+            }
+
+        </div>
+
+    </div>
+
+</div>

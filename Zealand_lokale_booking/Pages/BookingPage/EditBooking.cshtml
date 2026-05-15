@@ -1,0 +1,48 @@
+@page "{id:int}"
+@model Zealand_lokale_booking.Pages.BookingPage.EditBookingModel
+
+<div class="container mt-5">
+
+    <div class="card shadow-sm border-0">
+
+        <div class="card-header bg-dark text-white">
+            <h2>Rediger booking</h2>
+        </div>
+
+        <div class="card-body">
+
+            <form method="post">
+
+                <input type="hidden" asp-for="Booking.BookingId" />
+
+                <div class="mb-3">
+                    <label asp-for="Booking.UserId" class="form-label"></label>
+                    <input asp-for="Booking.UserId" class="form-control" />
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Booking.RoomId" class="form-label"></label>
+                    <input asp-for="Booking.RoomId" class="form-control" />
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Booking.StartTime" class="form-label"></label>
+                    <input asp-for="Booking.StartTime" class="form-control" type="datetime-local" />
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Booking.EndTime" class="form-label"></label>
+                    <input asp-for="Booking.EndTime" class="form-control" type="datetime-local" />
+                </div>
+
+                <button type="submit" class="btn btn-warning">
+                    Gem ændringer
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>

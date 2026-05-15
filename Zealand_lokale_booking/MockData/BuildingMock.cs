@@ -1,3 +1,5 @@
+using Zealand_lokale_booking.Models;
+
 namespace Zealand_lokale_booking.MockData;
 
 public class BuildingMock
@@ -6,8 +8,19 @@ public class BuildingMock
     {
         return new List<Building>
         {
-            new Building { Id = 1, Name = "Bygning A", Address = "Roskilde" },
-            new Building { Id = 2, Name = "Bygning B", Address = "Køge" }
+            new Building
+            {
+                BuildingId = 1,
+                BuildingName = "Bygning A",
+                Address = "Roskilde"
+            },
+
+            new Building
+            {
+                BuildingId = 2,
+                BuildingName = "Bygning B",
+                Address = "Køge"
+            }
         };
     }
 }

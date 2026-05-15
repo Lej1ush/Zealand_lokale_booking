@@ -1,3 +1,5 @@
+using Zealand_lokale_booking.Models;
+
 namespace Zealand_lokale_booking.MockData;
 
 public class RoomTypeMock
@@ -6,9 +8,23 @@ public class RoomTypeMock
     {
         return new List<RoomType>
         {
-            new RoomType { RoomTypeId = 1, TypeName = "Klasselokale" },
-            new RoomType { RoomTypeId = 2, TypeName = "Mødelokale" },
-            new RoomType { RoomTypeId = 3, TypeName = "Auditorium" }
+            new RoomType
+            {
+                RoomTypeId = 1,
+                TypeName = "Klasselokale"
+            },
+
+            new RoomType
+            {
+                RoomTypeId = 2,
+                TypeName = "Mødelokale"
+            },
+
+            new RoomType
+            {
+                RoomTypeId = 3,
+                TypeName = "Auditorium"
+            }
         };
     }
 }
