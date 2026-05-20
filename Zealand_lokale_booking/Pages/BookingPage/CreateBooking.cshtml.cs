@@ -10,7 +10,9 @@ namespace Zealand_lokale_booking.Pages.BookingPage
         private readonly BookingService _bookingService;
         private readonly RoomService _roomService;
 
-        public CreateBookingModel(BookingService bookingService, RoomService roomService)
+        public CreateBookingModel(
+            BookingService bookingService,
+            RoomService roomService)
         {
             _bookingService = bookingService;
             _roomService = roomService;
@@ -28,20 +30,20 @@ namespace Zealand_lokale_booking.Pages.BookingPage
         [BindProperty]
         public DateTime EndTime { get; set; }
 
-        public string Message { get; set; }
+        public string Message { get; set; } = "";
 
-        public List<Room> Rooms { get; set; } = new List<Room>();
+        public List<Room> Rooms { get; set; } = new();
 
-        public void OnGet()
+        public async Task OnGetAsync()
         {
-            Rooms = _roomService.GetAllRooms();
+            Rooms = await _roomService.GetAllRoomsAsync();
         }
 
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPostAsync()
         {
-            Rooms = _roomService.GetAllRooms();
+            Rooms = await _roomService.GetAllRoomsAsync();
 
-            var booking = _bookingService.CreateBooking(
+            var booking = await _bookingService.CreateBookingAsync(
                 UserId,
                 RoomId,
                 StartTime,

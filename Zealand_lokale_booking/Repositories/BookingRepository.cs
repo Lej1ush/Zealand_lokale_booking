@@ -1,56 +1,63 @@
+using Microsoft.EntityFrameworkCore;
+using Zealand_lokale_booking.EFDbContext;
 using Zealand_lokale_booking.Models;
-using System.Linq;
 
-namespace Zealand_lokale_booking.Repositories;
-
-public class BookingRepository
+namespace Zealand_lokale_booking.Repositories
 {
-    private List<Booking> bookings = new List<Booking>();
-
-    // mock data
-    public void SeedData()
+    public class BookingRepository
     {
-        bookings.Add(new Booking(1, 1, 101, DateTime.Now.AddHours(1), DateTime.Now.AddHours(3)));
-        bookings.Add(new Booking(2, 2, 102, DateTime.Now.AddHours(2), DateTime.Now.AddHours(4)));
-        bookings.Add(new Booking(3, 1, 103, DateTime.Now.AddDays(1), DateTime.Now.AddDays(1).AddHours(2)));
-    }
+        private readonly UserDbContext _context;
 
-    public Booking FindById(int id)
-    {
-        return bookings.FirstOrDefault(b => b.BookingId == id);
-    }
-
-    public List<Booking> FindByUser(int userId)
-    {
-        return bookings.Where(b => b.UserId == userId).ToList();
-    }
-
-    public List<Booking> FindByRoom(int roomId)
-    {
-        return bookings.Where(b => b.RoomId == roomId).ToList();
-    }
-
-    public List<Booking> FindByDate(DateTime date)
-    {
-        return bookings.Where(b => b.BookingDate.Date == date.Date).ToList();
-    }
-
-    public List<Booking> GetAll()
-    {
-        return bookings;
-    }
-
-    public void Save(Booking booking)
-    {
-        bookings.Add(booking);
-    }
-
-    public void Delete(int id)
-    {
-        var booking = FindById(id);
-        if (booking != null)
+        public BookingRepository(UserDbContext context)
         {
-            bookings.Remove(booking);
+            _context = context;
+        }
+
+        public async Task<List<Booking>> GetAllAsync()
+        {
+            return await _context.Bookings.ToListAsync();
+        }
+
+        public async Task<Booking?> FindByIdAsync(int id)
+        {
+            return await _context.Bookings
+                .FirstOrDefaultAsync(b => b.BookingId == id);
+        }
+
+        public async Task<List<Booking>> FindByUserAsync(int userId)
+        {
+            return await _context.Bookings
+                .Where(b => b.UserId == userId)
+                .ToListAsync();
+        }
+
+        public async Task<List<Booking>> FindByRoomAsync(int roomId)
+        {
+            return await _context.Bookings
+                .Where(b => b.RoomId == roomId)
+                .ToListAsync();
+        }
+
+        public async Task<List<Booking>> FindByDateAsync(DateTime date)
+        {
+            return await _context.Bookings
+                .Where(b => b.BookingDate.Date == date.Date)
+                .ToListAsync();
+        }
+
+        public async Task AddAsync(Booking booking)
+        {
+            await _context.Bookings.AddAsync(booking);
+        }
+
+        public void Delete(Booking booking)
+        {
+            _context.Bookings.Remove(booking);
+        }
+
+        public async Task SaveAsync()
+        {
+            await _context.SaveChangesAsync();
         }
     }
 }

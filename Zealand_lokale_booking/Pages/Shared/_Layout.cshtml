@@ -30,24 +30,27 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Index">Hjem</a>
                         </li>
+                        
+                        @* 
+<li class="nav-item">
+    <a class="nav-link text-dark" asp-page="/BookingPage/GetALLBookings">
+        Bookinger
+    </a>
+</li>
 
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-page="/BookingPage/GetAllBookings">
-                                Bookinger
-                            </a>
-                        </li>
+<li class="nav-item">
+    <a class="nav-link text-dark" asp-page="/Roompage/GetAllRooms">
+        Lokaler
+    </a>
+</li>
 
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-page="/Roompage/GetAllRooms">
-                                Lokaler
-                            </a>
-                        </li>
+<li class="nav-item">
+    <a class="nav-link text-dark" asp-page="/BookingPage/CreateBooking">
+        Opret booking
+    </a>
+</li>
+*@
 
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-page="/BookingPage/CreateBooking">
-                                Opret booking
-                            </a>
-                        </li>
 
                     </ul>
                     
@@ -78,12 +81,13 @@
                                         Create User
                                     </a>
                                 </li>
-
+                                
                                 <li class="nav-item">
-                                    <a class="btn btn-warning" asp-page="/LokalePage/CreateLokale">
+                                    <a class="btn btn-success" asp-page="/Roompage/CreateRoom">
                                         Create Lokale
                                     </a>
                                 </li>
+                                
                             }
                         }
 

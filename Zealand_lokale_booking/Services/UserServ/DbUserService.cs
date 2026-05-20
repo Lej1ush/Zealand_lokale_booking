@@ -63,10 +63,6 @@ namespace Zealand_lokale_booking.Services.UserServ
         //  Create user 
         public async Task CreateUserAsync(User user)
         {
-            var hasher = new PasswordHasher<string>();
-
-            user.Password = hasher.HashPassword(null, user.Password);
-
             await _repo.AddAsync(user);
             await _repo.SaveAsync();
         }
@@ -81,12 +77,6 @@ namespace Zealand_lokale_booking.Services.UserServ
         //  Update user
         public async Task UpdateUserAsync(User user)
         {
-            if (!string.IsNullOrWhiteSpace(user.Password))
-            {
-                var hasher = new PasswordHasher<string>();
-                user.Password = hasher.HashPassword(null, user.Password);
-            }
-
             await _repo.UpdateAsync(user);
             await _repo.SaveAsync();
         }

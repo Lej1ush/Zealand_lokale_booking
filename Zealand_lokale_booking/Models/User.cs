@@ -76,8 +76,7 @@ public class User
 
 
     [ForeignKey(nameof(RoleId))]
-
-    public Role Role { get; set; }
+    public Role? Role { get; set; }
 
 
 // Navigation property

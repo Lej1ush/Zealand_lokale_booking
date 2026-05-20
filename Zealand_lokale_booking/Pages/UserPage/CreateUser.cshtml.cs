@@ -65,9 +65,9 @@ namespace Zealand_lokale_booking.Pages.UserPage
     public class CreateUserModel : PageModel
     {
 
-        private readonly IDbUserService _userService;
+        private readonly IUserService _userService;
 
-        public CreateUserModel(IDbUserService userService)
+        public CreateUserModel(IUserService userService)
         {
             _userService = userService;
         }

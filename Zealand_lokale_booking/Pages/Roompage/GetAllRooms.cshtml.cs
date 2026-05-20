@@ -2,21 +2,22 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Zealand_lokale_booking.Models;
 using Zealand_lokale_booking.Services;
 
-namespace Zealand_lokale_booking.Pages.Roompage;
-
-public class GetAllRoomsModel : PageModel
+namespace Zealand_lokale_booking.Pages.Roompage
 {
-    private readonly RoomService _roomService;
-
-    public List<Room> Rooms { get; set; }
-
-    public GetAllRoomsModel(RoomService roomService)
+    public class GetAllRoomsModel : PageModel
     {
-        _roomService = roomService;
-    }
+        private readonly RoomService _roomService;
 
-    public void OnGet()
-    {
-        Rooms = _roomService.GetAllRooms();
+        public GetAllRoomsModel(RoomService roomService)
+        {
+            _roomService = roomService;
+        }
+
+        public List<Room> Rooms { get; set; } = new();
+
+        public async Task OnGetAsync()
+        {
+            Rooms = await _roomService.GetAllRoomsAsync();
+        }
     }
 }

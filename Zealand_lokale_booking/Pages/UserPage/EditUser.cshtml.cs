@@ -56,9 +56,9 @@ namespace Zealand_lokale_booking.Pages.UserPage
     public class EditUserModel : PageModel
     {
 
-        private readonly IDbUserService _userService;
+        private readonly IUserService _userService;
 
-        public EditUserModel(IDbUserService userService)
+        public EditUserModel(IUserService userService)
         {
             _userService = userService;
         }
@@ -82,10 +82,21 @@ namespace Zealand_lokale_booking.Pages.UserPage
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-                return Page();
+            var users = await _userService.GetAllUsersAsync();
 
-            await _userService.UpdateUserAsync(User);
+            var existingUser = users.FirstOrDefault(u => u.UserId == User.UserId);
+
+            if (existingUser == null)
+            {
+                return RedirectToPage("/UserPage/GetAllUsers");
+            }
+
+            existingUser.Name = User.Name;
+            existingUser.Email = User.Email;
+            existingUser.Password = User.Password;
+            existingUser.RoleId = User.RoleId;
+
+            await _userService.UpdateUserAsync(existingUser);
 
             return RedirectToPage("/UserPage/GetAllUsers");
         }

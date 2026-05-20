@@ -3,36 +3,37 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Zealand_lokale_booking.Models;
 using Zealand_lokale_booking.Services;
 
-namespace Zealand_lokale_booking.Pages.BookingPage;
-
-public class EditBookingModel : PageModel
+namespace Zealand_lokale_booking.Pages.BookingPage
 {
-    private readonly BookingService _bookingService;
-
-    [BindProperty]
-    public Booking Booking { get; set; }
-
-    public EditBookingModel(BookingService bookingService)
+    public class EditBookingModel : PageModel
     {
-        _bookingService = bookingService;
-    }
+        private readonly BookingService _bookingService;
 
-    public IActionResult OnGet(int id)
-    {
-        Booking = _bookingService.GetBookingById(id);
+        [BindProperty]
+        public Booking Booking { get; set; } = new();
 
-        if (Booking == null)
+        public EditBookingModel(BookingService bookingService)
         {
-            return RedirectToPage("/BookingPage/GetAllBookings");
+            _bookingService = bookingService;
         }
 
-        return Page();
-    }
+        public async Task<IActionResult> OnGetAsync(int id)
+        {
+            Booking = await _bookingService.GetBookingByIdAsync(id);
 
-    public IActionResult OnPost()
-    {
-        _bookingService.UpdateBooking(Booking);
+            if (Booking == null)
+            {
+                return RedirectToPage("/BookingPage/GetAllBookings");
+            }
 
-        return RedirectToPage("/BookingPage/GetAllBookings");
+            return Page();
+        }
+
+        public async Task<IActionResult> OnPostAsync()
+        {
+            await _bookingService.UpdateBookingAsync(Booking);
+
+            return RedirectToPage("/BookingPage/GetAllBookings");
+        }
     }
 }

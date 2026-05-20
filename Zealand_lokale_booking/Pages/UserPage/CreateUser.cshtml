@@ -37,11 +37,13 @@
 
                 <!-- Rolle -->
                 <div class="mb-3">
-                    <label class="form-label">Rolle</label>
-                    <select asp-for="User.RoleId" class="form-select">
-                        <option value="Student">Studerende</option>
-                        <option value="Teacher">Underviser</option>
-                        <option value="Admin">Administrator</option>
+                    <select asp-for="User.RoleId" class="form-control">
+
+                        <option value="">Vælg rolle</option>
+                        <option value="1">Admin</option>
+                        <option value="2">Underviser</option>
+                        <option value="3">Studerende</option>
+
                     </select>
                 </div>
 

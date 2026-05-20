@@ -1,42 +1,44 @@
+using Microsoft.EntityFrameworkCore;
+using Zealand_lokale_booking.EFDbContext;
 using Zealand_lokale_booking.Models;
-using System.Linq;
 
-namespace Zealand_lokale_booking.Repositories;
-
-public class RoomRepository
+namespace Zealand_lokale_booking.Repositories
 {
-    private List<Room> rooms = new List<Room>();
-
-    public RoomRepository()
+    public class RoomRepository
     {
-        // mockdata
-        rooms.Add(new Room(1, "A101", 30, 1, 1, 1));
-        rooms.Add(new Room(2, "B202", 10, 2, 1, 2));
-        rooms.Add(new Room(3, "C303", 50, 3, 2, 3));
-    }
+        private readonly UserDbContext _context;
 
-    // Hent alle rooms
-    public List<Room> GetAll()
-    {
-        return rooms;
-    }
-
-    // Find room med id
-    public Room GetById(int id)
-    {
-        foreach (var room in rooms)
+        public RoomRepository(UserDbContext context)
         {
-            if (room.RoomId == id)
-            {
-                return room;
-            }
+            _context = context;
         }
-        return null;
-    }
 
-    // Tilføj et room
-    public void Add(Room room)
-    {
-        rooms.Add(room);
+        // Hent alle lokaler inkl. SmartBoard
+        public async Task<List<Room>> GetAllAsync()
+        {
+            return await _context.Rooms
+                .Include(r => r.SmartBoard)
+                .ToListAsync();
+        }
+
+        // Hent lokale efter id inkl. SmartBoard
+        public async Task<Room?> GetByIdAsync(int id)
+        {
+            return await _context.Rooms
+                .Include(r => r.SmartBoard)
+                .FirstOrDefaultAsync(r => r.RoomId == id);
+        }
+
+        // Tilføj lokale
+        public async Task AddAsync(Room room)
+        {
+            await _context.Rooms.AddAsync(room);
+        }
+
+        // Gem ændringer
+        public async Task SaveAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
     }
 }

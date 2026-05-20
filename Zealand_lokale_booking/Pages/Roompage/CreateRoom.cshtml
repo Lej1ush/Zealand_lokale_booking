@@ -1,0 +1,23 @@
+@page
+@model Zealand_lokale_booking.Pages.Roompage.CreateRoomModel
+
+
+<h2>Opret lokale</h2>
+
+<form method="post">
+
+    <div class="mb-3">
+        <label>Lokale navn</label>
+        <input asp-for="Room.RoomName" class="form-control"/>
+    </div>
+
+    <div class="mb-3">
+        <label>Kapacitet</label>
+        <input asp-for="Room.Capacity" class="form-control"/>
+    </div>
+
+    <button type="submit" class="btn btn-success">
+        Opret
+    </button>
+
+</form>
