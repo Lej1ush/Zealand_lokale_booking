@@ -1,0 +1,27 @@
+@page "{id:int}"
+@model Zealand_lokale_booking.Pages.SmartBoardPage.DeleteSmartBoardModel
+
+<h2>Slet SmartBoard</h2>
+
+<p>Er du sikker på, at du vil slette dette SmartBoard?</p>
+
+@if (Model.SmartBoard != null)
+{
+    <div class="alert alert-warning">
+        <strong>@Model.SmartBoard.SmartBoardName</strong>
+        <br />
+        Tilgængelig: @(Model.SmartBoard.Availability ? "Ja" : "Nej")
+    </div>
+
+    <form method="post">
+        <input type="hidden" name="id" value="@Model.SmartBoard.SmartBoardId" />
+
+        <button type="submit" class="btn btn-danger">
+            Slet
+        </button>
+
+        <a asp-page="/SmartBoardPage/GetAllSmartBoards" class="btn btn-secondary">
+            Annuller
+        </a>
+    </form>
+}

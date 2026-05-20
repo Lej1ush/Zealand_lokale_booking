@@ -1,0 +1,56 @@
+@page
+@model Zealand_lokale_booking.Pages.SmartBoardPage.GetAllSmartBoardsModel
+
+<h2>SmartBoards</h2>
+
+<a asp-page="/SmartBoardPage/CreateSmartBoard"
+   class="btn btn-success mb-3">
+    Opret SmartBoard
+</a>
+
+<table class="table">
+
+    <thead>
+    <tr>
+        <th>Navn</th>
+        <th>Tilgængelig</th>
+        <th>Handlinger</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+    @foreach(var smartBoard in Model.SmartBoards)
+    {
+        <tr>
+
+            <td>
+                @smartBoard.SmartBoardName
+            </td>
+
+            <td>
+                @(smartBoard.Availability ? "Ja" : "Nej")
+            </td>
+
+            <td>
+
+                <a asp-page="/SmartBoardPage/EditSmartBoard"
+                   asp-route-id="@smartBoard.SmartBoardId"
+                   class="btn btn-warning btn-sm">
+                    Rediger
+                </a>
+
+                <a asp-page="/SmartBoardPage/DeleteSmartBoard"
+                   asp-route-id="@smartBoard.SmartBoardId"
+                   class="btn btn-danger btn-sm">
+                    Slet
+                </a>
+
+            </td>
+
+        </tr>
+    }
+
+    </tbody>
+
+</table>

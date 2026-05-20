@@ -21,6 +21,23 @@ namespace Zealand_lokale_booking.Repositories
                 .ToListAsync();
         }
 
+        // Hent alle SmartBoards
+        public async Task<List<SmartBoard>> GetAllSmartBoardsAsync()
+        {
+            return await _context.SmartBoards.ToListAsync();
+        }
+        
+        public async Task<List<Building>> GetAllBuildingsAsync()
+        {
+            return await _context.Buildings.ToListAsync();
+        }
+
+        // Hent alle lokaletypper
+        public async Task<List<RoomType>> GetAllRoomTypesAsync()
+        {
+            return await _context.RoomTypes.ToListAsync();
+        }
+
         // Hent lokale efter id inkl. SmartBoard
         public async Task<Room?> GetByIdAsync(int id)
         {
@@ -29,10 +46,22 @@ namespace Zealand_lokale_booking.Repositories
                 .FirstOrDefaultAsync(r => r.RoomId == id);
         }
 
-        // Tilføj lokale
+        // Opret lokale
         public async Task AddAsync(Room room)
         {
             await _context.Rooms.AddAsync(room);
+        }
+
+        // Opdater lokale
+        public void Update(Room room)
+        {
+            _context.Rooms.Update(room);
+        }
+
+        // Slet lokale
+        public void Delete(Room room)
+        {
+            _context.Rooms.Remove(room);
         }
 
         // Gem ændringer

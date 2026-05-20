@@ -23,6 +23,11 @@ builder.Services.AddScoped<BookingService>();
 builder.Services.AddScoped<RoomRepository>();
 builder.Services.AddScoped<RoomService>();
 
+//SmartBoard Service 
+builder.Services.AddScoped<SmartBoardRepository>();
+builder.Services.AddScoped<SmartBoardService>();
+
+
 builder.Services.AddDbContext<UserDbContext>(options =>
 {
     var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");

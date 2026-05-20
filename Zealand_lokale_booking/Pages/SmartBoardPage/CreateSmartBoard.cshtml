@@ -1,0 +1,26 @@
+@page
+@model Zealand_lokale_booking.Pages.SmartBoardPage.CreateSmartBoardModel
+
+<h2>Opret SmartBoard</h2>
+
+<form method="post">
+
+    <div class="mb-3">
+        <label>Navn</label>
+        <input asp-for="SmartBoard.SmartBoardName" class="form-control" />
+    </div>
+
+    <div class="mb-3 form-check">
+        <input asp-for="SmartBoard.Availability" class="form-check-input" />
+        <label class="form-check-label">Tilgængelig</label>
+    </div>
+
+    <button type="submit" class="btn btn-success">
+        Opret
+    </button>
+
+    <a asp-page="/SmartBoardPage/GetAllSmartBoards" class="btn btn-secondary">
+        Annuller
+    </a>
+
+</form>

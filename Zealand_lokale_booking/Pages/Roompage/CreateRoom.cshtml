@@ -1,19 +1,99 @@
 @page
 @model Zealand_lokale_booking.Pages.Roompage.CreateRoomModel
 
-
 <h2>Opret lokale</h2>
 
 <form method="post">
 
     <div class="mb-3">
         <label>Lokale navn</label>
-        <input asp-for="Room.RoomName" class="form-control"/>
+        <input asp-for="Room.RoomName" class="form-control" />
     </div>
 
     <div class="mb-3">
         <label>Kapacitet</label>
-        <input asp-for="Room.Capacity" class="form-control"/>
+
+        <select asp-for="Room.Capacity"
+                class="form-control">
+
+            <option value="">Vælg kapacitet</option>
+            <option value="4">4 personer</option>
+            <option value="8">8 personer</option>
+            <option value="12">12 personer</option>
+            <option value="20">20 personer</option>
+            <option value="30">30 personer</option>
+            <option value="50">50 personer</option>
+            <option value="100">100 personer</option>
+
+        </select>
+
+    </div>
+
+    <div class="mb-3">
+        <label>Etage</label>
+
+        <select asp-for="Room.Floor"
+                class="form-control">
+
+            <option value="">Vælg etage</option>
+            <option value="0">Stueetage</option>
+            <option value="1">1. sal</option>
+            <option value="2">2. sal</option>
+            <option value="3">3. sal</option>
+            <option value="4">4. sal</option>
+
+        </select>
+
+    </div>
+
+    <div class="mb-3">
+        <label>Bygning</label>
+
+        <select asp-for="Room.BuildingId"
+                asp-items="Model.BuildingOptions"
+                class="form-control">
+
+            <option value="">
+                Vælg bygning
+            </option>
+
+        </select>
+
+    </div>
+    <label>Lokaletype</label>
+
+    <select asp-for="Room.RoomTypeId"
+            class="form-control">
+        
+        <option>Undervisningslokale</option>
+        <option>Mødelokale</option>
+        <option>Grupperum</option>
+        <option>Eksamenslokale</option>
+        <option>Auditorium</option>
+        <option>Projektrum</option>
+        <option>Computerlokale</option>
+        <option>Studierum</option>
+        <option>Laboratorium</option>
+        <option>Læsesal</option>
+        
+     
+        
+
+    </select>
+
+    <div class="mb-3">
+        <label>SmartBoard</label>
+
+        <select asp-for="Room.SmartBoardId"
+                asp-items="Model.SmartBoardOptions"
+                class="form-control">
+
+            <option value="">
+                Vælg SmartBoard
+            </option>
+
+        </select>
+
     </div>
 
     <button type="submit" class="btn btn-success">

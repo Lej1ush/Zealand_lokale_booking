@@ -30,5 +30,41 @@ namespace Zealand_lokale_booking.Services
             await repository.AddAsync(room);
             await repository.SaveAsync();
         }
+
+        // Hent SmartBoards
+        public async Task<List<SmartBoard>> GetAllSmartBoardsAsync()
+        {
+            return await repository.GetAllSmartBoardsAsync();
+        }
+        
+        public async Task<List<Building>> GetAllBuildingsAsync()
+        {
+            return await repository.GetAllBuildingsAsync();
+        }
+
+        // Hent RoomTypes
+        public async Task<List<RoomType>> GetAllRoomTypesAsync()
+        {
+            return await repository.GetAllRoomTypesAsync();
+        }
+
+        // Opdater room
+        public async Task UpdateRoomAsync(Room room)
+        {
+            repository.Update(room);
+            await repository.SaveAsync();
+        }
+
+        // Slet room
+        public async Task DeleteRoomAsync(int id)
+        {
+            var room = await repository.GetByIdAsync(id);
+
+            if (room != null)
+            {
+                repository.Delete(room);
+                await repository.SaveAsync();
+            }
+        }
     }
 }

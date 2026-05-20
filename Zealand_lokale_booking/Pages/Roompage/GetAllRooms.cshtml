@@ -17,12 +17,14 @@
 
                     <thead class="table-light">
                     <tr>
-                            <th>Lokale ID</th>
-                            <th>Lokalenavn</th>
-                            <th>Kapacitet</th>
-                            <th>Etage</th>
-                            <th>Bygning ID</th>
-                            <th>Lokaletype ID</th>
+                        <th>Lokale ID</th>
+                        <th>Lokalenavn</th>
+                        <th>Kapacitet</th>
+                        <th>Etage</th>
+                        <th>Bygning ID</th>
+                        <th>Lokaletype ID</th>
+                        <th>SmartBoard</th>
+                        <th>Handlinger</th>
                     </tr>
                     </thead>
 
@@ -31,13 +33,36 @@
                     @foreach (var room in Model.Rooms)
                     {
                         <tr>
-                                <td>@room.RoomId</td>
-                                <td>@room.RoomName</td>
-                                <td>@room.Capacity</td>
-                                <td>@room.Floor</td>
-                                <td>@room.BuildingId</td>
-                                <td>@room.RoomTypeId</td>
-                            </tr>
+                            <td>@room.RoomId</td>
+                            <td>@room.RoomName</td>
+                            <td>@room.Capacity</td>
+                            <td>@room.Floor</td>
+                            <td>@room.BuildingId</td>
+                            <td>@room.RoomTypeId</td>
+
+                            <td>
+                                @(room.SmartBoard != null
+                                    ? room.SmartBoard.SmartBoardName
+                                    : "Ingen")
+                            </td>
+
+                            <td>
+
+                                <a asp-page="/Roompage/EditRoom"
+                                   asp-route-id="@room.RoomId"
+                                   class="btn btn-warning btn-sm">
+                                    Rediger
+                                </a>
+
+                                <a asp-page="/Roompage/DeleteRoom"
+                                   asp-route-id="@room.RoomId"
+                                   class="btn btn-danger btn-sm">
+                                    Slet
+                                </a>
+
+                            </td>
+
+                        </tr>
                     }
 
                     </tbody>

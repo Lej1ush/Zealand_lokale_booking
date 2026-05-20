@@ -1,0 +1,52 @@
+@page "{id:int}"
+@model Zealand_lokale_booking.Pages.Roompage.EditRoomModel
+
+<h2>Rediger lokale</h2>
+
+<form method="post">
+
+    <input type="hidden" asp-for="Room.RoomId" />
+
+    <div class="mb-3">
+        <label>Lokale navn</label>
+        <input asp-for="Room.RoomName" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Kapacitet</label>
+        <input asp-for="Room.Capacity" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Etage</label>
+        <input asp-for="Room.Floor" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Building Id</label>
+        <input asp-for="Room.BuildingId" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Room Type Id</label>
+        <input asp-for="Room.RoomTypeId" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>SmartBoard</label>
+        <select asp-for="Room.SmartBoardId"
+                asp-items="Model.SmartBoardOptions"
+                class="form-control">
+            <option value="">Ingen SmartBoard</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-success">
+        Gem
+    </button>
+
+    <a asp-page="/Roompage/GetAllRooms" class="btn btn-secondary">
+        Annuller
+    </a>
+
+</form>
