@@ -100,6 +100,7 @@
 
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
@@ -124,7 +125,7 @@ namespace Zealand_lokale_booking.Pages.LogInPage
         [DataType(DataType.Password)]
         public string Password { get; set; } = "";
         [BindProperty(SupportsGet = true)]
-      
+
         public int? Role { get; set; }
         public string Message { get; set; } = "";
 
@@ -136,45 +137,58 @@ namespace Zealand_lokale_booking.Pages.LogInPage
             {
                 if (Email.Trim().ToLower() == user.Email.Trim().ToLower())
                 {
-                    if (Password == user.Password)
+                    var passwordHasher = new PasswordHasher<User>();
+
+                    var result = passwordHasher.VerifyHashedPassword(
+                        user,
+                        user.Password,
+                        Password
+                    );
+
+                    if (result == PasswordVerificationResult.Success)
                     {
-                        if (user.RoleId != Role)
                         {
-                            Message = "Du har ikke adgang til denne login";
-                            return Page();
-                        }
+                            if (user.RoleId != Role)
+                            {
+                                Message = "Du har ikke adgang til denne login";
+                                return Page();
+                            }
 
-                        string roleName = user.Role.RoleName;
+                            string roleName = user.Role.RoleName;
 
-                        var claims = new List<Claim>
+                            var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name, user.Name),
                     new Claim(ClaimTypes.Email, user.Email),
                     new Claim(ClaimTypes.Role, roleName)
                 };
 
-                        var claimsIdentity = new ClaimsIdentity(
-                            claims,
-                            CookieAuthenticationDefaults.AuthenticationScheme
-                        );
+                            var claimsIdentity = new ClaimsIdentity(
+                                claims,
+                                CookieAuthenticationDefaults.AuthenticationScheme
+                            );
 
-                        await HttpContext.SignInAsync(
-                            CookieAuthenticationDefaults.AuthenticationScheme,
-                            new ClaimsPrincipal(claimsIdentity)
-                        );
+                            await HttpContext.SignInAsync(
+                                CookieAuthenticationDefaults.AuthenticationScheme,
+                                new ClaimsPrincipal(claimsIdentity)
+                            );
 
-                        if (roleName == "Admin")
-                        {
-                            return RedirectToPage("/LogInPage/AdminDashBoard");
+                            if (roleName == "Admin")
+                            {
+                                return RedirectToPage("/LogInPage/AdminDashBoard");
+                            }
+
+                            return RedirectToPage("/UserPage/UserDashBoard");
                         }
-
-                        return RedirectToPage("/UserPage/UserDashBoard");
                     }
                 }
-            }
 
+                ModelState.AddModelError("", "Forkert email eller adgangskode");
+                return Page();
+            }
             ModelState.AddModelError("", "Forkert email eller adgangskode");
             return Page();
         }
     }
+    
 }
