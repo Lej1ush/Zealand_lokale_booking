@@ -1,15 +1,15 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Zealand_lokale_booking.Models;
-using Zealand_lokale_booking.Services;
+using Zealand_lokale_booking.Services.SmartBoardServ;
 
 namespace Zealand_lokale_booking.Pages.SmartBoardPage
 {
     public class DeleteSmartBoardModel : PageModel
     {
-        private readonly SmartBoardService _smartBoardService;
+        private readonly ISmartBoardService _smartBoardService;
 
-        public DeleteSmartBoardModel(SmartBoardService smartBoardService)
+        public DeleteSmartBoardModel(ISmartBoardService smartBoardService)
         {
             _smartBoardService = smartBoardService;
         }
@@ -18,7 +18,7 @@ namespace Zealand_lokale_booking.Pages.SmartBoardPage
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            SmartBoard = await _smartBoardService.GetSmartBoardAsync(id);
+            SmartBoard = await _smartBoardService.GetSmartBoardByIdAsync(id);
 
             if (SmartBoard == null)
             {

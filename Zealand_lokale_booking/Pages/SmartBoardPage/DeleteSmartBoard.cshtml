@@ -1,27 +1,57 @@
 @page "{id:int}"
 @model Zealand_lokale_booking.Pages.SmartBoardPage.DeleteSmartBoardModel
 
-<h2>Slet SmartBoard</h2>
+<div class="container mt-5">
 
-<p>Er du sikker på, at du vil slette dette SmartBoard?</p>
+    <div class="card shadow-sm border-0 mx-auto" style="max-width:600px;">
 
-@if (Model.SmartBoard != null)
-{
-    <div class="alert alert-warning">
-        <strong>@Model.SmartBoard.SmartBoardName</strong>
-        <br />
-        Tilgængelig: @(Model.SmartBoard.Availability ? "Ja" : "Nej")
+        <div class="card-header bg-danger text-white">
+            <h2 class="mb-0">Slet SmartBoard</h2>
+        </div>
+
+        <div class="card-body">
+
+            @if (Model.SmartBoard != null)
+            {
+                <div class="alert alert-warning">
+                    Er du sikker på, at du vil slette dette SmartBoard?
+                </div>
+
+                <p>
+                    <strong>Navn:</strong>
+                    @Model.SmartBoard.SmartBoardName
+                </p>
+
+                <p>
+                    <strong>Status:</strong>
+                    @(Model.SmartBoard.Availability ? "Tilgængelig" : "Ikke tilgængelig")
+                </p>
+
+                <form method="post">
+
+                    <input type="hidden"
+                           name="id"
+                           value="@Model.SmartBoard.SmartBoardId" />
+
+                    <div class="d-flex justify-content-between">
+
+                        <a asp-page="/SmartBoardPage/GetAllSmartBoards"
+                           class="btn btn-secondary">
+                            Annuller
+                        </a>
+
+                        <button type="submit"
+                                class="btn btn-danger">
+                            Slet
+                        </button>
+
+                    </div>
+
+                </form>
+            }
+
+        </div>
+
     </div>
 
-    <form method="post">
-        <input type="hidden" name="id" value="@Model.SmartBoard.SmartBoardId" />
-
-        <button type="submit" class="btn btn-danger">
-            Slet
-        </button>
-
-        <a asp-page="/SmartBoardPage/GetAllSmartBoards" class="btn btn-secondary">
-            Annuller
-        </a>
-    </form>
-}
+</div>

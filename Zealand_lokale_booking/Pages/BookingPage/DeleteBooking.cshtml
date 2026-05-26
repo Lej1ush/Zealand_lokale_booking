@@ -6,21 +6,31 @@
     <div class="card shadow-lg border-0 rounded-4" style="max-width: 700px; width: 100%;">
 
         <div class="card-header bg-danger text-white rounded-top-4 p-4">
-            <h3 class="mb-0">Bekræft sletning</h3>
-            <p class="mb-0 mt-2">Du er ved at slette en booking fra systemet.</p>
+            <h3 class="mb-0">Bekræft annullering</h3>
+            <p class="mb-0 mt-2">
+                Du er ved at annullere en booking.
+            </p>
         </div>
 
         <div class="card-body p-4">
 
+            @if (!string.IsNullOrEmpty(Model.Message))
+            {
+                <div class="alert alert-danger">
+                    @Model.Message
+                </div>
+            }
+
             @if (Model.Booking != null)
             {
                 <div class="alert alert-warning rounded-3">
-                    Er du sikker på, at du vil slette denne booking? Handlingen kan ikke fortrydes.
+                    Er du sikker på, at du vil annullere denne booking?
                 </div>
 
                 <div class="border rounded-4 p-4 bg-light mb-4">
 
                     <div class="row mb-3">
+
                         <div class="col-md-6">
                             <strong>Booking ID</strong>
                             <p class="mb-0">@Model.Booking.BookingId</p>
@@ -28,6 +38,7 @@
 
                         <div class="col-md-6">
                             <strong>Status</strong>
+
                             <p class="mb-0">
                                 @if (Model.Booking.Status)
                                 {
@@ -39,45 +50,75 @@
                                 }
                             </p>
                         </div>
+
                     </div>
 
                     <div class="row mb-3">
-                        <div class="col-md-6">
-                            <strong>Bruger ID</strong>
-                            <p class="mb-0">@Model.Booking.UserId</p>
-                        </div>
 
                         <div class="col-md-6">
-                            <strong>Lokale ID</strong>
-                            <p class="mb-0">@Model.Booking.RoomId</p>
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <strong>Dato</strong>
-                            <p class="mb-0">@Model.Booking.BookingDate.ToShortDateString()</p>
-                        </div>
-
-                        <div class="col-md-6">
-                            <strong>Tidspunkt</strong>
+                            <strong>Bruger</strong>
                             <p class="mb-0">
-                                @Model.Booking.StartTime.ToString("HH:mm") - @Model.Booking.EndTime.ToString("HH:mm")
+                                @Model.Booking.User?.Email
                             </p>
                         </div>
+
+                        <div class="col-md-6">
+                            <strong>Lokale</strong>
+                            <p class="mb-0">
+                                @Model.Booking.Room?.RoomName
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div class="row mb-3">
+
+                        <div class="col-md-6">
+                            <strong>Rumtype</strong>
+                            <p class="mb-0">
+                                @Model.Booking.Room?.RoomType?.TypeName
+                            </p>
+                        </div>
+
+                        <div class="col-md-6">
+                            <strong>Dato</strong>
+                            <p class="mb-0">
+                                @Model.Booking.BookingDate.ToShortDateString()
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-12">
+                            <strong>Tidspunkt</strong>
+
+                            <p class="mb-0">
+                                @Model.Booking.StartTime.ToString("HH:mm")
+                                -
+                                @Model.Booking.EndTime.ToString("HH:mm")
+                            </p>
+                        </div>
+
                     </div>
 
                 </div>
 
                 <form method="post" class="d-flex gap-3">
 
-                    <button type="submit" class="btn btn-danger px-4">
-                        Ja, slet booking
+                    <button type="submit"
+                            class="btn btn-danger px-4">
+
+                        Annuller booking
+
                     </button>
 
                     <a asp-page="/BookingPage/GetAllBookings"
                        class="btn btn-outline-secondary px-4">
-                        Annuller
+
+                        Tilbage
+
                     </a>
 
                 </form>
@@ -90,7 +131,9 @@
 
                 <a asp-page="/BookingPage/GetAllBookings"
                    class="btn btn-dark">
+
                     Tilbage til bookinger
+
                 </a>
             }
 

@@ -2,10 +2,11 @@
 @model Zealand_lokale_booking.Pages.BookingPage.CreateBookingModel
 
 <div class="container mt-5">
-    <div class="card shadow border-0">
-        
+
+    <div class="card shadow-sm border-0 mx-auto" style="max-width: 800px;">
+
         <div class="card-header bg-dark text-white">
-            <h3>Opret booking</h3>
+            <h2 class="mb-0">Opret booking</h2>
         </div>
 
         <div class="card-body">
@@ -17,45 +18,93 @@
                 </div>
             }
 
-            <form method="post">
+            <div class="alert alert-info">
+                <h5>Bookingregler</h5>
 
-                <div class="mb-3">
-                    <label class="form-label">Bruger ID</label>
-                    <input asp-for="UserId" class="form-control"/>
-                </div>
+                <ul class="mb-0">
+                    <li>Mødelokaler bookes i 2 timers intervaller.</li>
+                    <li>SmartBoard bookes i 2 timers intervaller.</li>
+                    <li>Auditorium bookes 1 time ad gangen.</li>
+                    <li>Auditorium skal bookes mindst 2 dage før.</li>
+                    <li>Klasselokaler kan deles mellem 2 grupper.</li>
+                    <li>Undervisere kan annullere bookinger med 3 dages varsel.</li>
+                </ul>
+            </div>
+
+            <form method="post">
 
                 <div class="mb-3">
                     <label class="form-label">Vælg lokale</label>
 
-                    <select asp-for="RoomId" class="form-control">
-                        <option value="">-- Vælg lokale --</option>
+                    <select asp-for="RoomId"
+                            asp-items="Model.RoomOptions"
+                            class="form-control">
 
-                        @foreach (var room in Model.Rooms)
-                        {
-                            <option value="@room.RoomId">
-                                @room.RoomName - kapacitet: @room.Capacity
-                            </option>
-                        }
+                        <option value="">
+                            -- Vælg lokale --
+                        </option>
 
                     </select>
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">Start tidspunkt</label>
-                    <input asp-for="StartTime" type="datetime-local" class="form-control"/>
+                    <label class="form-label">Bookingdel</label>
+
+                    <select asp-for="BookingPartId"
+                            asp-items="Model.BookingPartOptions"
+                            class="form-control">
+
+                        <option value="">
+                            -- Hele lokalet --
+                        </option>
+
+                    </select>
+
+                    <small class="text-muted">
+                        Bruges især ved auditorium og klasselokaler.
+                    </small>
                 </div>
 
-                <div class="mb-3">
-                    <label class="form-label">Slut tidspunkt</label>
-                    <input asp-for="EndTime" type="datetime-local" class="form-control"/>
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Start tidspunkt</label>
+
+                        <input asp-for="StartTime"
+                               type="datetime-local"
+                               step="60"
+                               class="form-control" />
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Slut tidspunkt</label>
+
+                        <input asp-for="EndTime"
+                               type="datetime-local"
+                               step="60"
+                               class="form-control" />
+                    </div>
+
                 </div>
 
-                <button type="submit" class="btn btn-success">
-                    Opret booking
-                </button>
+                <div class="d-flex justify-content-between mt-4">
+
+                    <a asp-page="/BookingPage/GetAllBookings"
+                       class="btn btn-secondary">
+                        Tilbage
+                    </a>
+
+                    <button type="submit"
+                            class="btn btn-success">
+                        Opret booking
+                    </button>
+
+                </div>
 
             </form>
 
         </div>
+
     </div>
+
 </div>

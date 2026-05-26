@@ -1,14 +1,14 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Zealand_lokale_booking.Models;
-using Zealand_lokale_booking.Services;
+using Zealand_lokale_booking.Services.RoomServ;
 
 namespace Zealand_lokale_booking.Pages.Roompage
 {
     public class GetAllRoomsModel : PageModel
     {
-        private readonly RoomService _roomService;
+        private readonly IRoomService _roomService;
 
-        public GetAllRoomsModel(RoomService roomService)
+        public GetAllRoomsModel(IRoomService roomService)
         {
             _roomService = roomService;
         }

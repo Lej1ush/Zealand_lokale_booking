@@ -119,7 +119,8 @@ namespace Zealand_lokale_booking.Pages.LogInPage
             _userService = userService;
         }
 
-        [BindProperty] public string Email { get; set; } = "";
+        [BindProperty]
+        public string Email { get; set; } = "";
 
         [BindProperty]
         [DataType(DataType.Password)]

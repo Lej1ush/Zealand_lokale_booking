@@ -2,15 +2,15 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Zealand_lokale_booking.Models;
-using Zealand_lokale_booking.Services;
+using Zealand_lokale_booking.Services.RoomServ;
 
 namespace Zealand_lokale_booking.Pages.Roompage
 {
     public class CreateRoomModel : PageModel
     {
-        private readonly RoomService _roomService;
+        private readonly IRoomService _roomService;
 
-        public CreateRoomModel(RoomService roomService)
+        public CreateRoomModel(IRoomService roomService)
         {
             _roomService = roomService;
         }

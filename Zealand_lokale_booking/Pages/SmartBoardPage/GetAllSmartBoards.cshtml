@@ -1,56 +1,77 @@
 @page
 @model Zealand_lokale_booking.Pages.SmartBoardPage.GetAllSmartBoardsModel
 
-<h2>SmartBoards</h2>
+<div class="container mt-5">
 
-<a asp-page="/SmartBoardPage/CreateSmartBoard"
-   class="btn btn-success mb-3">
-    Opret SmartBoard
-</a>
+    <div class="card shadow-sm border-0">
 
-<table class="table">
+        <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+            <h2 class="mb-0">SmartBoards</h2>
 
-    <thead>
-    <tr>
-        <th>Navn</th>
-        <th>Tilgængelig</th>
-        <th>Handlinger</th>
-    </tr>
-    </thead>
+            <a asp-page="/SmartBoardPage/CreateSmartBoard" class="btn btn-success">
+                + Opret SmartBoard
+            </a>
+        </div>
 
-    <tbody>
+        <div class="card-body">
 
-    @foreach(var smartBoard in Model.SmartBoards)
-    {
-        <tr>
+            @if (Model.SmartBoards.Any())
+            {
+                <table class="table table-hover align-middle text-center">
+                    <thead class="table-light">
+                    <tr>
+                        <th>Navn</th>
+                        <th>Status</th>
+                        <th>Handlinger</th>
+                    </tr>
+                    </thead>
 
-            <td>
-                @smartBoard.SmartBoardName
-            </td>
+                    <tbody>
+                    @foreach (var smartBoard in Model.SmartBoards)
+                    {
+                        <tr>
+                            <td class="fw-semibold">
+                                @smartBoard.SmartBoardName
+                            </td>
 
-            <td>
-                @(smartBoard.Availability ? "Ja" : "Nej")
-            </td>
+                            <td>
+                                @if (smartBoard.Availability)
+                                {
+                                    <span class="badge bg-success">Tilgængelig</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger">Ikke tilgængelig</span>
+                                }
+                            </td>
 
-            <td>
+                            <td>
+                                <a asp-page="/SmartBoardPage/EditSmartBoard"
+                                   asp-route-id="@smartBoard.SmartBoardId"
+                                   class="btn btn-warning btn-sm">
+                                    Rediger
+                                </a>
 
-                <a asp-page="/SmartBoardPage/EditSmartBoard"
-                   asp-route-id="@smartBoard.SmartBoardId"
-                   class="btn btn-warning btn-sm">
-                    Rediger
-                </a>
+                                <a asp-page="/SmartBoardPage/DeleteSmartBoard"
+                                   asp-route-id="@smartBoard.SmartBoardId"
+                                   class="btn btn-danger btn-sm">
+                                    Slet
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <div class="alert alert-info">
+                    Der findes ingen SmartBoards endnu.
+                </div>
+            }
 
-                <a asp-page="/SmartBoardPage/DeleteSmartBoard"
-                   asp-route-id="@smartBoard.SmartBoardId"
-                   class="btn btn-danger btn-sm">
-                    Slet
-                </a>
+        </div>
 
-            </td>
+    </div>
 
-        </tr>
-    }
-
-    </tbody>
-
-</table>
+</div>

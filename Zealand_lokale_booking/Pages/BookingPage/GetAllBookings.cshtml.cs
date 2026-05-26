@@ -1,16 +1,16 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Zealand_lokale_booking.Models;
-using Zealand_lokale_booking.Services;
+using Zealand_lokale_booking.Services.BookingServ;
 
 namespace Zealand_lokale_booking.Pages.BookingPage
 {
     public class GetAllBookingsModel : PageModel
     {
-        private readonly BookingService _bookingService;
+        private readonly IBookingService _bookingService;
 
         public List<Booking> Bookings { get; set; } = new();
 
-        public GetAllBookingsModel(BookingService bookingService)
+        public GetAllBookingsModel(IBookingService bookingService)
         {
             _bookingService = bookingService;
         }
