@@ -18,11 +18,15 @@ namespace Zealand_lokale_booking.Pages.LogInPage
             _userService = userService;
         }
 
-        [BindProperty] public string Email { get; set; } = "";
+        [BindProperty]
+        public string Email { get; set; } = "";
 
         [BindProperty]
         [DataType(DataType.Password)]
         public string Password { get; set; } = "";
+
+        [BindProperty(SupportsGet = true)]
+        public string Role { get; set; } = "";
 
         public string Message { get; set; } = "";
 
@@ -48,13 +52,24 @@ namespace Zealand_lokale_booking.Pages.LogInPage
                                 roleName = "Teacher";
                                 break;
 
+                            case 3:
+                                roleName = "Student";
+                                break;
+
                             default:
                                 roleName = "User";
                                 break;
                         }
 
+                        if (Role != roleName)
+                        {
+                            Message = "Du har valgt en forkert rolle til denne bruger.";
+                            return Page();
+                        }
+
                         var claims = new List<Claim>
                         {
+                            new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
                             new Claim(ClaimTypes.Name, user.Name),
                             new Claim(ClaimTypes.Email, user.Email),
                             new Claim(ClaimTypes.Role, roleName)
@@ -80,7 +95,7 @@ namespace Zealand_lokale_booking.Pages.LogInPage
                 }
             }
 
-            Message = "Invalid attempt";
+            Message = "Forkert email eller adgangskode.";
             return Page();
         }
     }

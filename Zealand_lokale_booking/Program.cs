@@ -6,6 +6,10 @@ using Zealand_lokale_booking.Repositories;
 using Zealand_lokale_booking.Repositories.UserRep;
 using Zealand_lokale_booking.Services;
 using Zealand_lokale_booking.Services.UserServ;
+using Zealand_lokale_booking.Services.RoomServ;
+using Zealand_lokale_booking.Repositories;
+using Zealand_lokale_booking.Services.SmartBoardServ;
+using Zealand_lokale_booking.Services.BookingServ;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,15 +21,15 @@ builder.Services.AddScoped<IUserService, DbUserService>();
 
 // Booking service
 builder.Services.AddScoped<BookingRepository>();
-builder.Services.AddScoped<BookingService>();
+builder.Services.AddScoped<IBookingService, DbBookingService>();
 
 // Room service
 builder.Services.AddScoped<RoomRepository>();
-builder.Services.AddScoped<RoomService>();
+builder.Services.AddScoped<IRoomService, DbRoomService>();
 
 //SmartBoard Service 
 builder.Services.AddScoped<SmartBoardRepository>();
-builder.Services.AddScoped<SmartBoardService>();
+builder.Services.AddScoped<ISmartBoardService, DbSmartBoardService>();
 
 
 builder.Services.AddDbContext<UserDbContext>(options =>

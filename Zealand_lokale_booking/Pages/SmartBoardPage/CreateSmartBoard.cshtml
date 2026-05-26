@@ -1,26 +1,48 @@
 @page
 @model Zealand_lokale_booking.Pages.SmartBoardPage.CreateSmartBoardModel
 
-<h2>Opret SmartBoard</h2>
+<div class="container mt-5">
 
-<form method="post">
+    <div class="card shadow-sm border-0 mx-auto" style="max-width: 600px;">
 
-    <div class="mb-3">
-        <label>Navn</label>
-        <input asp-for="SmartBoard.SmartBoardName" class="form-control" />
+        <div class="card-header bg-success text-white">
+            <h2 class="mb-0">Opret SmartBoard</h2>
+        </div>
+
+        <div class="card-body">
+
+            <form method="post">
+
+                <div class="mb-3">
+                    <label class="form-label">SmartBoard navn</label>
+                    <input asp-for="SmartBoard.SmartBoardName"
+                           class="form-control"
+                           placeholder="Fx SmartBoard A" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Status</label>
+                    <select asp-for="SmartBoard.Availability" class="form-control">
+                        <option value="true">Tilgængelig</option>
+                        <option value="false">Ikke tilgængelig</option>
+                    </select>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <a asp-page="/SmartBoardPage/GetAllSmartBoards"
+                       class="btn btn-secondary">
+                        Annuller
+                    </a>
+
+                    <button type="submit" class="btn btn-success">
+                        Opret
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+
     </div>
 
-    <div class="mb-3 form-check">
-        <input asp-for="SmartBoard.Availability" class="form-check-input" />
-        <label class="form-check-label">Tilgængelig</label>
-    </div>
-
-    <button type="submit" class="btn btn-success">
-        Opret
-    </button>
-
-    <a asp-page="/SmartBoardPage/GetAllSmartBoards" class="btn btn-secondary">
-        Annuller
-    </a>
-
-</form>
+</div>

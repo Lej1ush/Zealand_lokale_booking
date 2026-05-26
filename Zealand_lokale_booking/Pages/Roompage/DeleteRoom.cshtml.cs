@@ -1,17 +1,17 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Zealand_lokale_booking.Models;
-using Zealand_lokale_booking.Services;
+using Zealand_lokale_booking.Services.RoomServ;
 
 namespace Zealand_lokale_booking.Pages.Roompage
 {
     public class DeleteRoomModel : PageModel
     {
-        private readonly RoomService _roomService;
+        private readonly IRoomService _roomService;
 
         public Room? Room { get; set; }
 
-        public DeleteRoomModel(RoomService roomService)
+        public DeleteRoomModel(IRoomService roomService)
         {
             _roomService = roomService;
         }

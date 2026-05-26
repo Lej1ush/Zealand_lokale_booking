@@ -4,16 +4,24 @@ public class Room
 {
     // Properties
     public int RoomId { get; set; }
+
     public string RoomName { get; set; }
+
     public int Capacity { get; set; }
+
     public int Floor { get; set; }
 
     public int BuildingId { get; set; }
+
     public int RoomTypeId { get; set; }
 
     public int? SmartBoardId { get; set; }
 
-    // Navigation property
+    // Navigation properties
+    public Building? Building { get; set; }
+
+    public RoomType? RoomType { get; set; }
+
     public SmartBoard? SmartBoard { get; set; }
 
     public Room()

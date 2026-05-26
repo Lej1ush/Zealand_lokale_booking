@@ -1,15 +1,15 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Zealand_lokale_booking.Models;
-using Zealand_lokale_booking.Services;
+using Zealand_lokale_booking.Services.SmartBoardServ;
 
 namespace Zealand_lokale_booking.Pages.SmartBoardPage
 {
     public class CreateSmartBoardModel : PageModel
     {
-        private readonly SmartBoardService _smartBoardService;
+        private readonly ISmartBoardService _smartBoardService;
 
-        public CreateSmartBoardModel(SmartBoardService smartBoardService)
+        public CreateSmartBoardModel(ISmartBoardService smartBoardService)
         {
             _smartBoardService = smartBoardService;
         }
@@ -23,7 +23,9 @@ namespace Zealand_lokale_booking.Pages.SmartBoardPage
 
         public async Task<IActionResult> OnPostAsync()
         {
-            await _smartBoardService.CreateSmartBoardAsync(SmartBoard);
+            SmartBoard.Availability = true;
+
+            await _smartBoardService.AddSmartBoardAsync(SmartBoard);
 
             return RedirectToPage("/SmartBoardPage/GetAllSmartBoards");
         }

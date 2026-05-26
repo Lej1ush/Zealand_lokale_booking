@@ -5,8 +5,12 @@
 
     <div class="card shadow-sm border-0">
 
-        <div class="card-header bg-dark text-white">
-            <h2>Alle lokaler</h2>
+        <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+            <h2 class="mb-0">Alle lokaler</h2>
+
+            <a asp-page="/Roompage/CreateRoom" class="btn btn-success">
+                + Opret lokale
+            </a>
         </div>
 
         <div class="card-body">
@@ -17,12 +21,11 @@
 
                     <thead class="table-light">
                     <tr>
-                        <th>Lokale ID</th>
-                        <th>Lokalenavn</th>
+                        <th>Lokale</th>
                         <th>Kapacitet</th>
                         <th>Etage</th>
-                        <th>Bygning ID</th>
-                        <th>Lokaletype ID</th>
+                        <th>Bygning</th>
+                        <th>Lokaletype</th>
                         <th>SmartBoard</th>
                         <th>Handlinger</th>
                     </tr>
@@ -33,20 +36,62 @@
                     @foreach (var room in Model.Rooms)
                     {
                         <tr>
-                            <td>@room.RoomId</td>
-                            <td>@room.RoomName</td>
-                            <td>@room.Capacity</td>
-                            <td>@room.Floor</td>
-                            <td>@room.BuildingId</td>
-                            <td>@room.RoomTypeId</td>
 
-                            <td>
-                                @(room.SmartBoard != null
-                                    ? room.SmartBoard.SmartBoardName
-                                    : "Ingen")
+                            <td class="fw-semibold">
+                                @room.RoomName
                             </td>
 
                             <td>
+                                <span class="badge bg-primary">
+                                    @room.Capacity personer
+                                </span>
+                            </td>
+
+                            <td>
+                                @if (room.Floor == 0)
+                                {
+                                    <span>Stueetage</span>
+                                }
+                                else
+                                {
+                                    <span>@room.Floor. sal</span>
+                                }
+                            </td>
+
+                            <td>
+                                @(room.Building != null
+                                    ? $"{room.Building.BuildingName} - {room.Building.Address}"
+                                    : "Ingen bygning")
+                            </td>
+
+                            <td>
+                                @(room.RoomType != null
+                                    ? room.RoomType.TypeName
+                                    : "Ingen type")
+                            </td>
+
+                            <td>
+                                @if (room.SmartBoard != null)
+                                {
+                                    <span class="badge bg-success">
+                                        @room.SmartBoard.SmartBoardName
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary">
+                                        Ingen
+                                    </span>
+                                }
+                            </td>
+
+                            <td>
+
+                                <a asp-page="/BookingPage/CreateBooking"
+                                   asp-route-roomId="@room.RoomId"
+                                   class="btn btn-primary btn-sm">
+                                    Book lokale
+                                </a>
 
                                 <a asp-page="/Roompage/EditRoom"
                                    asp-route-id="@room.RoomId"
@@ -71,7 +116,9 @@
             }
             else
             {
-                <p>Der findes ingen lokaler endnu.</p>
+                <div class="alert alert-info">
+                    Der findes ingen lokaler endnu.
+                </div>
             }
 
         </div>

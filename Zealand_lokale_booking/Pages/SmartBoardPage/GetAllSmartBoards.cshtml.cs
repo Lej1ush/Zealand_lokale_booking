@@ -1,15 +1,14 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Zealand_lokale_booking.Models;
-using Zealand_lokale_booking.Services;
+using Zealand_lokale_booking.Services.SmartBoardServ;
 
 namespace Zealand_lokale_booking.Pages.SmartBoardPage
 {
     public class GetAllSmartBoardsModel : PageModel
     {
-        private readonly SmartBoardService _smartBoardService;
+        private readonly ISmartBoardService _smartBoardService;
 
-        public GetAllSmartBoardsModel(
-            SmartBoardService smartBoardService)
+        public GetAllSmartBoardsModel(ISmartBoardService smartBoardService)
         {
             _smartBoardService = smartBoardService;
         }
@@ -18,8 +17,7 @@ namespace Zealand_lokale_booking.Pages.SmartBoardPage
 
         public async Task OnGetAsync()
         {
-            SmartBoards =
-                await _smartBoardService.GetAllSmartBoardsAsync();
+            SmartBoards = await _smartBoardService.GetAllSmartBoardsAsync();
         }
     }
 }

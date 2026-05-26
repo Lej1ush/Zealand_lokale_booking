@@ -1,12 +1,12 @@
 namespace Zealand_lokale_booking.Models;
 
-// BookingPart bruges især til auditorium
-// hvor man kan booke enten hel eller halv del
-
 public class BookingPart
 {
     public int BookingPartId { get; set; }
-    public string PartName { get; set; }
+
+    public string PartName { get; set; } = "";
+
+    public ICollection<Booking> Bookings { get; set; } = new List<Booking>();
 
     public BookingPart()
     {
