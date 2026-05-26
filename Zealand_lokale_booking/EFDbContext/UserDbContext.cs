@@ -43,16 +43,6 @@ namespace Zealand_lokale_booking.EFDbContext
                 new Role { RoleId = 3, RoleName = "Teacher" }
             );
 
-            modelBuilder.Entity<User>().HasData(
-                new User
-                {
-                    UserId = 1,
-                    Name = "Admin",
-                    Email = "admin@gmail.com",
-                    Password = "admin123",
-                    RoleId = 1
-                }
-            );
 
             modelBuilder.Entity<Building>().HasData(
                 new Building

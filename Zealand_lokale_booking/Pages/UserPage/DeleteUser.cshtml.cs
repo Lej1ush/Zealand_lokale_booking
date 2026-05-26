@@ -55,9 +55,9 @@ namespace Zealand_lokale_booking.Pages.UserPage
     public class DeleteUserModel : PageModel
     {
 
-        private readonly IDbUserService _userService;
+        private readonly IUserService _userService;
 
-        public DeleteUserModel(IDbUserService userService)
+        public DeleteUserModel(IUserService userService)
         {
             _userService = userService;
         }
@@ -67,7 +67,7 @@ namespace Zealand_lokale_booking.Pages.UserPage
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            var users = await _userService.GetAllUsersAsync();
+            var users = await _userService.GetUsersWithRolesAsync();
 
             User = users.FirstOrDefault(u => u.UserId == id);
 

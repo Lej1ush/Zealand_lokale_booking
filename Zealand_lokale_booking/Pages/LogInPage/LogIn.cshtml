@@ -9,44 +9,51 @@
     <h1>Zealand</h1>
 
     <div class="card">
-        <strong>🔒 Admin og skemalæggere</strong><br />
+            <strong>
+                <i class="fa fa-lock me-1"></i>
+                Admin og skemalæggere
+            </strong>
         <span class="desc">
-            Administratorer og planlæggere med klient bruger
+                Administratorer og planlæggere med klientadgang
         </span><br />
         <a class="btn-login"
            asp-page="/LogInPage/LogInForm"
-           asp-route-role="Admin">
+               asp-route-role="1">
+                <i class="fa fa-sign-in-alt me-2"></i>
             Log ind
         </a>
     </div>
 
     <div class="card">
-        <strong>🔒 Medarbejdere Zealand</strong><br />
+            <strong>   <i class="fa fa-lock me-1"></i> Medarbejdere Zealand</strong><br />
         <span class="desc">
             Er du medarbejder eller underviser?
         </span><br />
         <a class="btn-login"
            asp-page="/LogInPage/LogInForm"
-           asp-route-role="Teacher">
+               asp-route-role="3">
+                <i class="fa fa-sign-in-alt me-2"></i>
             Log ind
         </a>
     </div>
 
     <div class="card">
-        <strong>🔒 Studerende Zealand</strong><br />
+            <strong>   <i class="fa fa-lock me-1"></i> Studerende Zealand</strong><br />
         <span class="desc">
             Er du studerende?
         </span><br />
         <a class="btn-login"
            asp-page="/LogInPage/LogInForm"
-           asp-route-role="Student">
+               asp-route-role="2">
+                <i class="fa fa-sign-in-alt me-2"></i>
             Log ind
         </a>
     </div>
 
     <div class="back-container">
-        <a asp-page="/Index" class="btn-back">
-            Tilbage
+        <a asp-page="/Index" class="btn btn-back ">
+                <i class="fa fa-arrow-left me-1"></i>
+              Tilbage
         </a>
     </div>
 </div>

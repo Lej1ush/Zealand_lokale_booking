@@ -20,24 +20,24 @@ namespace Zealand_lokale_booking.Pages.UserPage
         public int? SearchId { get; set; }
 
         [BindProperty(SupportsGet = true)]
-        public RoleType? Role { get; set; }
+        public int? Role { get; set; }
 
         public GetAllUsersModel(IUserService userService)
         {
             _userService = userService;
         }
 
-        public async Task OnGet()
-        {
-            if (Role.HasValue)
-            {
-                Users = await _userService.GetUsersByRoleAsync((int)Role.Value);
+public async Task OnGet()
+{
+    if (Role.HasValue)
+    {
+                Users = await _userService.GetUsersByRoleAsync(Role.Value);
             }
-            else
-            {
-                Users = await _userService.GetAllUsersAsync();
-            }
-        }
+    else
+    {
+        Users = await _userService.GetUsersWithRolesAsync();
+    }
+}
 
         public async Task<IActionResult> OnPostNameSearch()
         {

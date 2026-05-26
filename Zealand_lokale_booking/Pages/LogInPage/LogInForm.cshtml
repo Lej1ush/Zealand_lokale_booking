@@ -13,23 +13,28 @@
         </div>
 
         <form method="post">
-
+            <input type="hidden" asp-for="Role" />  
             <div class="form-group mb-3">
-                <label>Email</label>
+                <label><i class="fa fa-envelope me-1"></i> Email</label>
                 <input asp-for="Email" class="form-control" />
             </div>
 
             <div class="form-group mb-4">
-                <label>Password</label>
+                <label>
+                    <i class="fa fa-lock me-1"></i>
+                    Adgangskode
+                </label>
                 <input asp-for="Password" type="password" class="form-control" />
             </div>
 
             <button class="btn btn-warning w-100 mb-3">
+                <i class="fa fa-sign-in-alt me-2"></i>
                 Log ind
             </button>
 
             <div class="text-center">
-                <a asp-page="/Index" class="btn btn-outline-dark">
+                <a asp-page="/LogInPage/LogIn" class="btn btn-back">
+                    <i class="fa fa-arrow-left me-1"></i>
                     Tilbage
                 </a>
             </div>
@@ -40,6 +45,3 @@
 
 </div>
 
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}

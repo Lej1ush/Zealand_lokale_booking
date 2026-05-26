@@ -7,22 +7,48 @@
     <div class="card shadow-sm border-danger">
 
         <div class="card-header bg-danger text-white">
-            <h5>⚠️ Slet bruger</h5>
+            <h5>
+                <i class="fa fa-exclamation-triangle me-2"></i>
+                Slet bruger
+            </h5>
         </div>
 
         <div class="card-body">
+            <div class="text-center mb-3">
+
+                <img src="@Model.User.ImagePath"
+                     width="120"
+                     height="120"
+                     class="rounded-circle border shadow-sm object-fit-cover" />
+
+            </div>
 
             <p>Er du sikker på, at du vil slette denne bruger?</p>
 
             <ul class="list-group mb-3">
                 <li class="list-group-item">
-                    <strong>Navn:</strong> @Model.User.Name
+                    <strong>
+                        <i class="fa fa-id-badge me-1"></i>
+                        Id:
+                    </strong> @Model.User.UserId
                 </li>
                 <li class="list-group-item">
-                    <strong>Email:</strong> @Model.User.Email
+                    <strong>
+                        <i class="fa fa-user me-1"></i>
+                        Navn:
+                    </strong> @Model.User.Name
                 </li>
                 <li class="list-group-item">
-                    <strong>Rolle:</strong> @Model.User.RoleId
+                    <strong>
+                        <i class="fa fa-envelope me-1"></i>
+                        Email:
+                    </strong> @Model.User.Email
+                </li>
+                <li class="list-group-item">
+                    <strong>
+                        <i class="fa fa-user-tag me-1"></i>
+                        Rolle:
+                    </strong> @Model.User.Role?.RoleName
                 </li>
             </ul>
 
@@ -30,11 +56,17 @@
                 <input type="hidden" asp-for="User.UserId" />
 
                 <div class="d-flex justify-content-between">
-                    <a asp-page="/UserPage/GetAllUsers" class="btn btn-secondary">
+                    <a asp-page="/UserPage/GetAllUsers"
+                       class="btn btn-secondary">
+
+                        <i class="fa fa-times me-1"></i>
                         Annuller
                     </a>
 
-                    <button type="submit" class="btn btn-danger">
+                    <button type="submit"
+                            class="btn btn-danger">
+
+                        <i class="fa fa-trash me-1"></i>
                         Slet
                     </button>
                 </div>

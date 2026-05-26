@@ -47,4 +47,37 @@ main {
 }
 
 
+.nav-btn {
+    width: 170px;
+    height: 45px;
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+    font-size: 1rem;
+
+    margin-bottom: 8px;
+}
+
+.nav-hjem {
+    color: white !important;
+}
+
+.logout-btn {
+    background: transparent;
+    border: 2px solid #dc3545;
+    color: #dc3545;
+}
+
+.custom-navbar .nav-hjem {
+    color: white !important;
+}
+
+.dashboard-subtitle {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #6b7280;
+    margin-bottom: 35px;
+}

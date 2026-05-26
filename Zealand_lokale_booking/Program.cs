@@ -15,9 +15,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddRazorPages();
 
+
+
 // User service
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IUserService, DbUserService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();   //logik
+builder.Services.AddScoped<IUserService, JsonUserService>();      //db
+//builder.Services.AddScoped<JsonFileService>();
 
 // Booking service
 builder.Services.AddScoped<BookingRepository>();

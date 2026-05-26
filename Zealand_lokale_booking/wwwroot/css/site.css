@@ -180,17 +180,20 @@ body {
     }
 
 .blue {
-    background: linear-gradient(135deg, #007bff, #0056b3);
+    background: linear-gradient(135deg, #2563eb, #1e3a8a);
 }
 
 .orange {
-    background: linear-gradient(135deg, #fd7e14, #c75b00);
+    background: linear-gradient(135deg, #f97316, #c2410c);
 }
 
-.green {
-    background: linear-gradient(135deg, #28a745, #1e7e34);
+.green { 
+    background: linear-gradient(135deg, #9333ea, #6b21a8);
 }
 
+.dark {
+    background: linear-gradient(135deg, #ec4899, #be185d);
+}
 
 
 .access-denied {
