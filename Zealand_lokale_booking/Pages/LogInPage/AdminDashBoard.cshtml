@@ -2,17 +2,31 @@
 @model Zealand_lokale_booking.Pages.LogInPage.AdminDashBoardModel
 @{
 }
-<h2 class="dashboard-title">Admin Dashboard</h2>
-
+<h2 class="dashboard-title">
+    Administratorpanel
+</h2>
+<p class="dashboard-subtitle">
+    Vælg en kategori
+</p>
 <div class="dashboard-container">
+    <a asp-page="/UserPage/GetAllUsers" class="dashboard-card dark">
 
-    <a asp-page="/UserPage/GetAllUsers" asp-route-role="Student" class="dashboard-card blue">
+        <div class="icon">
+            <i class="bi bi-people-fill"></i>
+        </div>
+
+        <h4>Alle brugere</h4>
+
+        <p>Se alle brugere</p>
+    </a>
+
+    <a asp-page="/UserPage/GetAllUsers" asp-route-role="2" class="dashboard-card blue">
         <div class="icon"><i class="bi bi-mortarboard-fill"></i></div>
         <h4>Studerende</h4>
         <p>Se alle studerende</p>
     </a>
 
-    <a asp-page="/UserPage/GetAllUsers" asp-route-role="Teacher" class="dashboard-card orange">
+    <a asp-page="/UserPage/GetAllUsers" asp-route-role="3" class="dashboard-card orange">
         <div class="icon"><i class="bi bi-person-workspace"></i></div>
         <h4>Undervisere</h4>
         <p>Se alle undervisere</p>

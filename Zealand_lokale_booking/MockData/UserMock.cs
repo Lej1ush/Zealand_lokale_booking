@@ -35,7 +35,7 @@ namespace Zealand_lokale_booking.MockData;
                         UserId = 3,
                         Name = "Admin",
                         Email = "admin@gmail.com",
-                        Password = "admin",
+                        Password = "admin123",
                         RoleId = 3
                     }
                 };

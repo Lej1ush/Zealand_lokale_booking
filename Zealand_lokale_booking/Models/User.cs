@@ -77,9 +77,9 @@ public class User
 
     [ForeignKey(nameof(RoleId))]
     public Role? Role { get; set; }
+    public string? ImagePath { get; set; }
 
-
-// Navigation property
+    // Navigation property
 
     public ICollection<UserCourse> UserCourses { get; set; }
 
@@ -90,7 +90,7 @@ public class User
     public User() { }
 
 
-    public User(string name, string email, string password, int roleId)
+    public User(string name, string email, string password, int roleId, string?  imagePath)
 
     {
 
@@ -101,7 +101,7 @@ public class User
         Password = password;
 
         RoleId = roleId;
-
+        ImagePath = imagePath;
     }
 }
 

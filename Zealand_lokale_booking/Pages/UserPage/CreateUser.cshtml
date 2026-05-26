@@ -6,13 +6,15 @@
     <div class="card shadow-sm">
 
         <div class="card-header bg-success text-white">
-            <h5 class="mb-0">➕ Opret bruger</h5>
+            <h5 class="mb-0">
+                <i class="fa fa-user-plus me-2"></i>
+                Opret bruger</h5>
         </div>
 
         <div class="card-body">
             <div asp-validation-summary="All" class="text-danger mb-3"></div>
 
-            <form method="post">
+            <form method="post" enctype="multipart/form-data">
 
                 <!-- Navn -->
                 <div class="mb-3">
@@ -34,15 +36,26 @@
                     <label class="form-label">Adgangskode</label>
                     <input asp-for="User.Password" class="form-control" required />
                 </div>
+                <!-- Foto -->
+                <div class="mb-3">
 
+                    <label class="form-label">
+                        <i class="fa fa-image me-1"></i>
+                        Foto
+                    </label>
+
+                    <input type="file"
+                           asp-for="ImageFile"
+                           class="form-control" />
+
+                </div>
                 <!-- Rolle -->
                 <div class="mb-3">
-                    <select asp-for="User.RoleId" class="form-control">
+                    <select asp-for="User.RoleId" class="form-select">
 
                         <option value="">Vælg rolle</option>
-                        <option value="1">Admin</option>
-                        <option value="2">Underviser</option>
-                        <option value="3">Studerende</option>
+                        <option value="3">Underviser</option>
+                        <option value="2">Studerende</option>
 
                     </select>
                 </div>
@@ -50,12 +63,10 @@
                 <!-- Knapper -->
                 <div class="d-flex justify-content-between">
                     <a asp-page="/UserPage/GetAllUsers" class="btn btn-secondary">
-                        Annuller
-                    </a>
+                        <i class="fa fa-times me-1"></i> Annuller</a>
 
                     <button type="submit" class="btn btn-success">
-                        Opret
-                    </button>
+                        <i class="fa fa-check me-1"></i> Opret </button>
                 </div>
 
             </form>

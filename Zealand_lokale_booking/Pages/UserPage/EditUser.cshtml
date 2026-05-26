@@ -5,46 +5,89 @@
 <div class="container mt-4" style="max-width: 500px;">
     <div class="card shadow-sm">
         <div class="card-header bg-primary text-white">
-            <h5 class="mb-0">Rediger bruger</h5>
+            <h5 class="mb-0">
+                <i class="fa fa-user-edit me-2"></i>
+                Rediger bruger
+            </h5>
         </div>
 
         <div class="card-body">
-            <form method="post">
+            <div class="text-center mb-3">
+
+                <img src="@Model.User.ImagePath"
+                     width="120"
+                     height="120"
+                     class="rounded-circle border shadow-sm object-fit-cover" />
+
+            </div>
+            <form method="post" enctype="multipart/form-data">
 
                 <input type="hidden" asp-for="User.UserId" />
                 <input type="hidden" asp-for="User.RoleId" />
 
                 <!-- Navn -->
                 <div class="mb-3">
-                    <label class="form-label">Navn</label>
+                    <label class="form-label">
+                        <i class="fa fa-user me-1"></i>
+                        Navn
+                    </label>
                     <input asp-for="User.Name" class="form-control" />
                 </div>
 
                 <!-- Email -->
                 <div class="mb-3">
-                    <label class="form-label">Email</label>
+                    <label class="form-label">
+                        <i class="fa fa-envelope me-1"></i>
+                        Email
+                    </label>
                     <input asp-for="User.Email" class="form-control" />
                 </div>
 
                 <!-- Adgangskode -->
                 <div class="mb-3">
-                    <label class="form-label">Adgangskode</label>
+                    <label class="form-label">
+                        <i class="fa fa-lock me-1"></i>
+                        Adgangskode
+                    </label>
                     <input asp-for="User.Password" class="form-control" />
                 </div>
+                <!-- Foto -->
+                <div class="mb-3">
 
+                    <label class="form-label">
+                        <i class="fa fa-image me-1"></i>
+                        Foto
+                    </label>
+
+                    <input type="file"
+                           asp-for="ImageFile"
+                           class="form-control" />
+
+                </div>
                 <!-- Rolle (kun visning) -->
                 <div class="mb-3">
-                    <label class="form-label">Rolle</label>
-                    <input class="form-control" value="@Model.User.RoleId" disabled />
+                    <label class="form-label">
+                        <i class="fa fa-user-tag me-1"></i>
+                        Rolle
+                    </label>
+                    <input class="form-control"
+                           value="@Model.User.Role?.RoleName"
+                           disabled />
                 </div>
 
                 <!-- Knapper -->
                 <div class="d-flex justify-content-between">
-                    <a asp-page="/UserPage/GetAllUsers" class="btn btn-secondary">
+                    <a asp-page="/UserPage/GetAllUsers"
+                       class="btn btn-secondary">
+
+                        <i class="fa fa-times me-1"></i>
                         Annuller
                     </a>
 
-                    <button type="submit" class="btn btn-success">
+                    <button type="submit"
+                            class="btn btn-success">
+
+                        <i class="fa fa-save me-1"></i>
                         Gem ændringer
                     </button>
                 </div>

@@ -57,6 +57,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Zealand_lokale_booking.Models;
 using Zealand_lokale_booking.Services.UserServ;
+using Microsoft.AspNetCore.Http;
 
 namespace Zealand_lokale_booking.Pages.UserPage
 {
@@ -74,6 +75,8 @@ namespace Zealand_lokale_booking.Pages.UserPage
 
         [BindProperty]
         public User User { get; set; }
+        [BindProperty]
+        public IFormFile? ImageFile { get; set; }
 
         public void OnGet()
         {
@@ -86,8 +89,7 @@ namespace Zealand_lokale_booking.Pages.UserPage
                 return Page();
 
             // Student
-            // Student
-            if (User.RoleId == 1 &&
+            if (User.RoleId == 2 &&
                 !User.Email.ToLower().EndsWith("@edu.zealand.dk"))
             {
                 ModelState.AddModelError("", "Studerende skal have en email der slutter med @edu.zealand.dk");
@@ -95,13 +97,35 @@ namespace Zealand_lokale_booking.Pages.UserPage
             }
 
 // Teacher
-            if (User.RoleId == 2 &&
+            if (User.RoleId == 3 &&
                 !User.Email.ToLower().EndsWith("@zealand.dk"))
             {
                 ModelState.AddModelError("", "Undervisere skal have en email der slutter med @zealand.dk");
                 return Page();
             }
+            if (ImageFile != null)
+            {
+                string fileName = Guid.NewGuid().ToString()
+                                  + Path.GetExtension(ImageFile.FileName);
 
+                string folder = Path.Combine(
+                    Directory.GetCurrentDirectory(),
+                    "wwwroot/images/users");
+
+                if (!Directory.Exists(folder))
+                {
+                    Directory.CreateDirectory(folder);
+                }
+
+                string filePath = Path.Combine(folder, fileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await ImageFile.CopyToAsync(stream);
+                }
+
+                User.ImagePath = "/images/users/" + fileName;
+            }
             await _userService.CreateUserAsync(User);
 
             return RedirectToPage("/UserPage/GetAllUsers");
