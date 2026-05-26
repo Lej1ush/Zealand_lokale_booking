@@ -10,6 +10,8 @@ using Zealand_lokale_booking.Services.RoomServ;
 using Zealand_lokale_booking.Repositories;
 using Zealand_lokale_booking.Services.SmartBoardServ;
 using Zealand_lokale_booking.Services.BookingServ;
+using Microsoft.AspNetCore.Identity;
+using Zealand_lokale_booking.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -83,5 +85,23 @@ app.MapStaticAssets();
 
 app.MapRazorPages()
     .WithStaticAssets();
+
+
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<UserDbContext>();
+
+    var passwordHasher = new PasswordHasher<User>();
+
+    foreach (var user in context.Users)
+    {
+        if (!user.Password.StartsWith("AQAAAA"))
+        {
+            user.Password = passwordHasher.HashPassword(user, user.Password);
+        }
+    }
+
+    context.SaveChanges();
+}
 
 app.Run();

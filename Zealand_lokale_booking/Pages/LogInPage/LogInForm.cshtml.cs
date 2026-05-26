@@ -125,9 +125,10 @@ namespace Zealand_lokale_booking.Pages.LogInPage
         [BindProperty]
         [DataType(DataType.Password)]
         public string Password { get; set; } = "";
-        [BindProperty(SupportsGet = true)]
 
+        [BindProperty(SupportsGet = true)]
         public int? Role { get; set; }
+
         public string Message { get; set; } = "";
 
         public async Task<IActionResult> OnPostAsync()
@@ -148,48 +149,44 @@ namespace Zealand_lokale_booking.Pages.LogInPage
 
                     if (result == PasswordVerificationResult.Success)
                     {
+                        if (user.RoleId != Role)
                         {
-                            if (user.RoleId != Role)
-                            {
-                                Message = "Du har ikke adgang til denne login";
-                                return Page();
-                            }
-
-                            string roleName = user.Role.RoleName;
-
-                            var claims = new List<Claim>
-                {
-                    new Claim(ClaimTypes.Name, user.Name),
-                    new Claim(ClaimTypes.Email, user.Email),
-                    new Claim(ClaimTypes.Role, roleName)
-                };
-
-                            var claimsIdentity = new ClaimsIdentity(
-                                claims,
-                                CookieAuthenticationDefaults.AuthenticationScheme
-                            );
-
-                            await HttpContext.SignInAsync(
-                                CookieAuthenticationDefaults.AuthenticationScheme,
-                                new ClaimsPrincipal(claimsIdentity)
-                            );
-
-                            if (roleName == "Admin")
-                            {
-                                return RedirectToPage("/LogInPage/AdminDashBoard");
-                            }
-
-                            return RedirectToPage("/UserPage/UserDashBoard");
+                            Message = "Du har ikke adgang til denne login.";
+                            return Page();
                         }
+
+                        string roleName = user.Role?.RoleName ?? "User";
+
+                        var claims = new List<Claim>
+                        {
+                            new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
+                            new Claim(ClaimTypes.Name, user.Name),
+                            new Claim(ClaimTypes.Email, user.Email),
+                            new Claim(ClaimTypes.Role, roleName)
+                        };
+
+                        var claimsIdentity = new ClaimsIdentity(
+                            claims,
+                            CookieAuthenticationDefaults.AuthenticationScheme
+                        );
+
+                        await HttpContext.SignInAsync(
+                            CookieAuthenticationDefaults.AuthenticationScheme,
+                            new ClaimsPrincipal(claimsIdentity)
+                        );
+
+                        if (roleName == "Admin")
+                        {
+                            return RedirectToPage("/LogInPage/AdminDashBoard");
+                        }
+
+                        return RedirectToPage("/UserPage/UserDashBoard");
                     }
                 }
-
-                ModelState.AddModelError("", "Forkert email eller adgangskode");
-                return Page();
             }
-            ModelState.AddModelError("", "Forkert email eller adgangskode");
+
+            Message = "Forkert email eller adgangskode.";
             return Page();
         }
     }
-    
 }

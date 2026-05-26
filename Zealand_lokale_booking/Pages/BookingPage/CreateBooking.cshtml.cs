@@ -38,7 +38,7 @@ namespace Zealand_lokale_booking.Pages.BookingPage
 
         public List<SelectListItem> BookingPartOptions { get; set; } = new();
 
-        public async Task OnGetAsync(int? roomId)
+        public async Task OnGetAsync()
         {
             var start = DateTime.Now.AddHours(1);
 
@@ -53,14 +53,8 @@ namespace Zealand_lokale_booking.Pages.BookingPage
 
             EndTime = StartTime.AddHours(2);
 
-            if (roomId != null)
-            {
-                RoomId = roomId.Value;
-            }
-
             await LoadDropdownsAsync();
         }
-
         public async Task<IActionResult> OnPostAsync()
         {
             await LoadDropdownsAsync();
