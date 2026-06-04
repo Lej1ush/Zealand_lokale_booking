@@ -5,7 +5,7 @@ VisualStudioVersion = 17.14.36518.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zealand_lokale_booking", "Zealand_lokale_booking\Zealand_lokale_booking.csproj", "{A37B0634-AF98-45BE-B728-591A9AF222C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject1", "TestProject1\TestProject1.csproj", "{9E69B9AC-7D07-4E03-96D0-5BD0D71A64E5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZealandUniTest", "..\Zealand_lokale_booking9\TestProject1\ZealandUniTest.csproj", "{452DD6CD-CE2F-0389-217B-F5C472D98F32}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{A37B0634-AF98-45BE-B728-591A9AF222C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A37B0634-AF98-45BE-B728-591A9AF222C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A37B0634-AF98-45BE-B728-591A9AF222C3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9E69B9AC-7D07-4E03-96D0-5BD0D71A64E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9E69B9AC-7D07-4E03-96D0-5BD0D71A64E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9E69B9AC-7D07-4E03-96D0-5BD0D71A64E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9E69B9AC-7D07-4E03-96D0-5BD0D71A64E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{452DD6CD-CE2F-0389-217B-F5C472D98F32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{452DD6CD-CE2F-0389-217B-F5C472D98F32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{452DD6CD-CE2F-0389-217B-F5C472D98F32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{452DD6CD-CE2F-0389-217B-F5C472D98F32}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

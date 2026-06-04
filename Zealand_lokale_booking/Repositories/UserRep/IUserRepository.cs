@@ -19,6 +19,7 @@
 //        void Delete(int id);
 
 //        List<User> GetByRole(int roleId);
+//        void SaveUsers(List<User> users);
 //    }
 //}
 

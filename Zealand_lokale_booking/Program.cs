@@ -20,9 +20,14 @@ builder.Services.AddRazorPages();
 
 
 // User service
+
+//builder.Services.AddSingleton<JsonFileService>();                     //mock-json     //opretter ASP.NET obj
+//builder.Services.AddScoped<IUserService, JsonUserService>();        //mock
+
+
 builder.Services.AddScoped<IUserRepository, UserRepository>();   //logik
 builder.Services.AddScoped<IUserService, JsonUserService>();      //db
-//builder.Services.AddScoped<JsonFileService>();
+
 
 // Booking service
 builder.Services.AddScoped<BookingRepository>();
@@ -37,7 +42,7 @@ builder.Services.AddScoped<SmartBoardRepository>();
 builder.Services.AddScoped<ISmartBoardService, DbSmartBoardService>();
 
 
-builder.Services.AddDbContext<UserDbContext>(options =>
+builder.Services.AddDbContext<UserDbContext>(options =>                           //registrer i DI og forbinder mes mysql
 {
     var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
@@ -56,7 +61,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     .AddCookie(cookieOptions =>
     {
         cookieOptions.LoginPath = "/LogInPage/LogIn";
-        cookieOptions.AccessDeniedPath = "/LogInPage/AccessDenied";
+        cookieOptions.AccessDeniedPath = "/Account/AccessDenied";
     });
 
 builder.Services.AddMvc()

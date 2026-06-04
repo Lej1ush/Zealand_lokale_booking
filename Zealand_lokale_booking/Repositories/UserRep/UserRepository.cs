@@ -69,11 +69,22 @@
 //                .Where(u => u.RoleId == roleId)
 //                .ToList();
 //        }
+
+
+//public void SaveUsers(List<User> users)
+//{
+//    foreach (User user in users)
+//    {
+//        _context.Users.Add(user);
+//    }
+
+//    _context.SaveChanges();
+//}
 //    }
 //}
 
 
-using Zealand_lokale_booking.EFDbContext;
+using Zealand_lokale_booking.EFDbContext;                   
 using Zealand_lokale_booking.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -81,11 +92,11 @@ namespace Zealand_lokale_booking.Repositories.UserRep
 {
     public class UserRepository : IUserRepository
     {
-        private readonly UserDbContext _context;
+        private readonly UserDbContext _context;                                                                         //obj der forbindes med db
 
         public UserRepository(UserDbContext context)
         {
-            _context = context;
+            _context = context;                                                                                       // tag obj via DI i prog 
         }
 
         //DB  

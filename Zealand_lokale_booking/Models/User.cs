@@ -53,25 +53,24 @@ public class User
     public int UserId { get; set; }
 
 
-    [Required]
-
+    [Display(Name = "Navn")]
+    [Required(ErrorMessage = "Der skal angives et navn")]
     public string Name { get; set; } = "";
 
-
-    [Required]
-
-    [EmailAddress]
-
+    [Display(Name = "E-mail")]
+    [Required(ErrorMessage = "Der skal angives en e-mail")]
+    [EmailAddress(ErrorMessage = "Ugyldig e-mail adresse")]
     public string Email { get; set; } = "";
 
 
-    [Required]
 
+    [Display(Name = "Adgangskode")]
+    [Required(ErrorMessage = "Der skal angives en adgangskode")]
     public string Password { get; set; } = "";
 
 
-    [Required]
-
+    [Display(Name = "Rolle")]
+    [Range(1, int.MaxValue, ErrorMessage = "Vælg venligst en rolle")]
     public int RoleId { get; set; }
 
 

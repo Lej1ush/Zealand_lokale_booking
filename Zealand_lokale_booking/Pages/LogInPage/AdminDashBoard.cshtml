@@ -2,40 +2,53 @@
 @model Zealand_lokale_booking.Pages.LogInPage.AdminDashBoardModel
 @{
 }
+<div class="container">
+    <div class="row g-4 justify-content-center">
 <h2 class="dashboard-title">
     Administratorpanel
 </h2>
-<p class="dashboard-subtitle">
-    Vælg en kategori
-</p>
-<div class="dashboard-container">
-    <a asp-page="/UserPage/GetAllUsers" class="dashboard-card dark">
+<div class="row g-4">
 
-        <div class="icon">
-            <i class="bi bi-people-fill"></i>
-        </div>
+    <div class="col-12 col-md-6 col-lg-3">
+        <a asp-page="/UserPage/GetAllUsers" class="dashboard-card dark">
+            <div class="icon">
+                <i class="bi bi-people-fill"></i>
+            </div>
+            <h4>Alle brugere</h4>
+            <p>Se alle brugere</p>
+        </a>
+    </div>
 
-        <h4>Alle brugere</h4>
+    <div class="col-12 col-md-6 col-lg-3">
+        <a asp-page="/UserPage/GetAllUsers" asp-route-role="2" class="dashboard-card blue">
+            <div class="icon">
+                <i class="bi bi-mortarboard-fill"></i>
+            </div>
+            <h4>Studerende</h4>
+            <p>Se alle studerende</p>
+        </a>
+    </div>
 
-        <p>Se alle brugere</p>
-    </a>
+    <div class="col-12 col-md-6 col-lg-3">
+        <a asp-page="/UserPage/GetAllUsers" asp-route-role="3" class="dashboard-card orange">
+            <div class="icon">
+                <i class="bi bi-person-workspace"></i>
+            </div>
+            <h4>Undervisere</h4>
+            <p>Se alle undervisere</p>
+        </a>
+    </div>
 
-    <a asp-page="/UserPage/GetAllUsers" asp-route-role="2" class="dashboard-card blue">
-        <div class="icon"><i class="bi bi-mortarboard-fill"></i></div>
-        <h4>Studerende</h4>
-        <p>Se alle studerende</p>
-    </a>
+    <div class="col-12 col-md-6 col-lg-3">
+        <a asp-page="/Roompage/GetAllRooms" class="dashboard-card green">
+            <div class="icon">
+                <i class="bi bi-building"></i>
+            </div>
+            <h4>Lokaler</h4>
+            <p>Se alle lokaler</p>
+        </a>
+    </div>
 
-    <a asp-page="/UserPage/GetAllUsers" asp-route-role="3" class="dashboard-card orange">
-        <div class="icon"><i class="bi bi-person-workspace"></i></div>
-        <h4>Undervisere</h4>
-        <p>Se alle undervisere</p>
-    </a>
-
-    <a asp-page="/Roompage/GetAllRooms" class="dashboard-card green">
-        <div class="icon"><i class="bi bi-building"></i></div>
-        <h4>Lokaler</h4>
-        <p>Se alle lokaler</p>
-    </a>
-
+</div>
+    </div>
 </div>

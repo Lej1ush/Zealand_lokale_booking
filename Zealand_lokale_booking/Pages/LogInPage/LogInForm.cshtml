@@ -24,7 +24,28 @@
                     <i class="fa fa-lock me-1"></i>
                     Adgangskode
                 </label>
-                <input asp-for="Password" type="password" class="form-control" />
+
+                <div class="position-relative mb-3">
+                    <input asp-for="Password"
+                           type="password"
+                           id="passwordField"                                                         @*  // giv navn for scripr *@
+                           class="form-control" />
+
+                    <i class="fa fa-eye password-eye"
+                       onclick="togglePassword()"></i>                                                    @*   //klik *@
+                </div>
+
+                <script>
+                    function togglePassword() {                                                                // Opretter funktionen
+                        var password = document.getElementById("passwordField");
+
+                        if (password.type === "password") {                                                   // Tjekker om password er skjult
+                            password.type = "text";                                                             // Viser password
+                        } else {
+                            password.type = "password";                                                            // Skjuler password igen
+                        }
+                    }
+                </script>
             </div>
 
             <button class="btn btn-warning w-100 mb-3">
