@@ -21,6 +21,9 @@
                     <thead class="table-light">
                     <tr>
                         <th>Navn</th>
+                        <th>Størrelse</th>
+                        <th>Beskrivelse</th>
+                        <th>Lokale</th>
                         <th>Status</th>
                         <th>Handlinger</th>
                     </tr>
@@ -32,6 +35,25 @@
                         <tr>
                             <td class="fw-semibold">
                                 @smartBoard.SmartBoardName
+                            </td>
+
+                            <td>
+                                @smartBoard.SizeInches"
+                            </td>
+
+                            <td class="text-start">
+                                @smartBoard.Description
+                            </td>
+
+                            <td>
+                                @if (smartBoard.Room != null)
+                                {
+                                    @smartBoard.Room.RoomName
+                                }
+                                else
+                                {
+                                    <span class="text-muted">Ingen lokale tilknyttet</span>
+                                }
                             </td>
 
                             <td>

@@ -26,7 +26,6 @@
                         <th>Etage</th>
                         <th>Bygning</th>
                         <th>Lokaletype</th>
-                        <th>SmartBoard</th>
                         <th>Handlinger</th>
                     </tr>
                     </thead>
@@ -68,21 +67,6 @@
                                 @(room.RoomType != null
                                     ? room.RoomType.TypeName
                                     : "Ingen type")
-                            </td>
-
-                            <td>
-                                @if (room.SmartBoard != null)
-                                {
-                                    <span class="badge bg-success">
-                                        @room.SmartBoard.SmartBoardName
-                                    </span>
-                                }
-                                else
-                                {
-                                    <span class="badge bg-secondary">
-                                        Ingen
-                                    </span>
-                                }
                             </td>
 
                             <td>

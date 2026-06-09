@@ -242,15 +242,6 @@ namespace Zealand_lokale_booking.Services.BookingServ
                 return true;
             }
 
-            if (room.SmartBoardId != null)
-            {
-                if (duration.TotalHours != 2)
-                {
-                    ErrorMessage = "SmartBoard skal bookes i 2 timers intervaller.";
-                    return false;
-                }
-            }
-
             if (duration.TotalHours > 2)
             {
                 ErrorMessage = "Lokalet kan højst bookes i 2 timer.";

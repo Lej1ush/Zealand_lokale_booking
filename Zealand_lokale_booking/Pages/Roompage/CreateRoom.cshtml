@@ -57,7 +57,6 @@
 
                 <div class="mb-3">
                     <label class="form-label">Lokaletype</label>
-
                     <select asp-for="Room.RoomTypeId"
                             asp-items="Model.RoomTypeOptions"
                             class="form-control">
@@ -65,13 +64,8 @@
                     </select>
                 </div>
 
-                <div class="mb-4">
-                    <label class="form-label">SmartBoard</label>
-                    <select asp-for="Room.SmartBoardId"
-                            asp-items="Model.SmartBoardOptions"
-                            class="form-control">
-                        <option value="">Vælg SmartBoard</option>
-                    </select>
+                <div class="alert alert-info">
+                    SmartBoards tilknyttes under SmartBoard-siden, da ikke alle lokaler har et SmartBoard.
                 </div>
 
                 <div class="d-flex justify-content-between">

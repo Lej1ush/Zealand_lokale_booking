@@ -15,8 +15,7 @@ public class RoomMock
                 Capacity = 30,
                 Floor = 1,
                 BuildingId = 1,
-                RoomTypeId = 1,
-                SmartBoardId = 1
+                RoomTypeId = 1
             },
 
             new Room
@@ -26,8 +25,7 @@ public class RoomMock
                 Capacity = 10,
                 Floor = 2,
                 BuildingId = 1,
-                RoomTypeId = 2,
-                SmartBoardId = 2
+                RoomTypeId = 2
             },
 
             new Room
@@ -37,8 +35,7 @@ public class RoomMock
                 Capacity = 50,
                 Floor = 3,
                 BuildingId = 2,
-                RoomTypeId = 3,
-                SmartBoardId = 1
+                RoomTypeId = 3
             }
         };
     }

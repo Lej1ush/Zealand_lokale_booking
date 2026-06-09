@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Zealand_lokale_booking.Models;
+using Zealand_lokale_booking.Services.RoomServ;
 using Zealand_lokale_booking.Services.SmartBoardServ;
 
 namespace Zealand_lokale_booking.Pages.SmartBoardPage
@@ -8,14 +10,18 @@ namespace Zealand_lokale_booking.Pages.SmartBoardPage
     public class EditSmartBoardModel : PageModel
     {
         private readonly ISmartBoardService _smartBoardService;
+        private readonly IRoomService _roomService;
 
-        public EditSmartBoardModel(ISmartBoardService smartBoardService)
+        public EditSmartBoardModel(ISmartBoardService smartBoardService, IRoomService roomService)
         {
             _smartBoardService = smartBoardService;
+            _roomService = roomService;
         }
 
         [BindProperty]
         public SmartBoard SmartBoard { get; set; } = new();
+
+        public SelectList RoomOptions { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
@@ -27,6 +33,10 @@ namespace Zealand_lokale_booking.Pages.SmartBoardPage
             }
 
             SmartBoard = smartBoard;
+
+            var rooms = await _roomService.GetAllRoomsAsync();
+            RoomOptions = new SelectList(rooms, "RoomId", "RoomName");
+
             return Page();
         }
 

@@ -3,7 +3,7 @@
 
 <div class="container mt-5">
 
-    <div class="card shadow-sm border-0 mx-auto" style="max-width:600px;">
+    <div class="card shadow-sm border-0 mx-auto" style="max-width:700px;">
 
         <div class="card-header bg-warning">
             <h2 class="mb-0">Rediger SmartBoard</h2>
@@ -23,6 +23,41 @@
 
                     <input asp-for="SmartBoard.SmartBoardName"
                            class="form-control" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">
+                        Størrelse (tommer)
+                    </label>
+
+                    <input asp-for="SmartBoard.SizeInches"
+                           class="form-control" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">
+                        Beskrivelse
+                    </label>
+
+                    <textarea asp-for="SmartBoard.Description"
+                              class="form-control"
+                              rows="4"></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">
+                        Lokale
+                    </label>
+
+                    <select asp-for="SmartBoard.RoomId"
+                            asp-items="Model.RoomOptions"
+                            class="form-control">
+
+                        <option value="">
+                            Ingen lokale tilknyttet
+                        </option>
+
+                    </select>
                 </div>
 
                 <div class="mb-3">
@@ -50,16 +85,12 @@
 
                     <a asp-page="/SmartBoardPage/GetAllSmartBoards"
                        class="btn btn-secondary">
-
                         Tilbage
-
                     </a>
 
                     <button type="submit"
                             class="btn btn-warning">
-
                         Gem ændringer
-
                     </button>
 
                 </div>

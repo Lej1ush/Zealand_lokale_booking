@@ -2,7 +2,6 @@ namespace Zealand_lokale_booking.Models;
 
 public class Room
 {
-    // Properties
     public int RoomId { get; set; }
 
     public string RoomName { get; set; }
@@ -15,20 +14,14 @@ public class Room
 
     public int RoomTypeId { get; set; }
 
-    public int? SmartBoardId { get; set; }
-
-    // Navigation properties
     public Building? Building { get; set; }
 
     public RoomType? RoomType { get; set; }
-
-    public SmartBoard? SmartBoard { get; set; }
 
     public Room()
     {
     }
 
-    // Constructor
     public Room(
         int roomId,
         string roomName,

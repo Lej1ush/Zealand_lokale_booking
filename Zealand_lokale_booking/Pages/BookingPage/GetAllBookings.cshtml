@@ -20,7 +20,6 @@
                         <th>Bruger</th>
                         <th>Lokale</th>
                         <th>Rumtype</th>
-                        <th>SmartBoard</th>
                         <th>Dato</th>
                         <th>Start</th>
                         <th>Slut</th>
@@ -35,82 +34,43 @@
                     {
                         <tr>
 
-                            <td>
-                                @booking.BookingId
-                            </td>
+                            <td>@booking.BookingId</td>
 
-                            <td>
-                                @booking.User?.Email
-                            </td>
+                            <td>@booking.User?.Email</td>
 
-                            <td>
-                                @booking.Room?.RoomName
-                            </td>
+                            <td>@booking.Room?.RoomName</td>
 
-                            <td>
-                                @booking.Room?.RoomType?.TypeName
-                            </td>
+                            <td>@booking.Room?.RoomType?.TypeName</td>
 
-                            <td>
-                                @if (booking.Room?.SmartBoard != null)
-                                {
-                                    <span class="badge bg-info text-dark">
-                                        @booking.Room.SmartBoard.SmartBoardName
-                                    </span>
-                                }
-                                else
-                                {
-                                    <span class="badge bg-secondary">
-                                        Intet SmartBoard
-                                    </span>
-                                }
-                            </td>
+                            <td>@booking.BookingDate.ToShortDateString()</td>
 
-                            <td>
-                                @booking.BookingDate.ToShortDateString()
-                            </td>
+                            <td>@booking.StartTime.ToString("HH:mm")</td>
 
-                            <td>
-                                @booking.StartTime.ToString("HH:mm")
-                            </td>
-
-                            <td>
-                                @booking.EndTime.ToString("HH:mm")
-                            </td>
+                            <td>@booking.EndTime.ToString("HH:mm")</td>
 
                             <td>
                                 @if (booking.Status)
                                 {
-                                    <span class="badge bg-success">
-                                        Aktiv
-                                    </span>
+                                    <span class="badge bg-success">Aktiv</span>
                                 }
                                 else
                                 {
-                                    <span class="badge bg-secondary">
-                                        Aflyst
-                                    </span>
+                                    <span class="badge bg-secondary">Aflyst</span>
                                 }
                             </td>
 
                             <td>
-
                                 <a class="btn btn-warning btn-sm"
                                    asp-page="/BookingPage/EditBooking"
                                    asp-route-id="@booking.BookingId">
-
                                     Rediger
-
                                 </a>
 
                                 <a class="btn btn-danger btn-sm"
                                    asp-page="/BookingPage/DeleteBooking"
                                    asp-route-id="@booking.BookingId">
-
                                     Slet
-
                                 </a>
-
                             </td>
 
                         </tr>
