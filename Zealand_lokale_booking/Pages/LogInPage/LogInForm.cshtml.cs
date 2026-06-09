@@ -144,9 +144,9 @@ namespace Zealand_lokale_booking.Pages.LogInPage
 
             foreach (User user in users)
             {
-                if (Email.Trim().ToLower() == user.Email.Trim().ToLower())
+                if (Email.Trim().ToLower() == user.Email.Trim().ToLower())        //email
                 {
-                    var passwordHasher = new PasswordHasher<User>();
+                    var passwordHasher = new PasswordHasher<User>();             //tjek pin
 
                     var result = passwordHasher.VerifyHashedPassword(
                         user,
@@ -156,7 +156,7 @@ namespace Zealand_lokale_booking.Pages.LogInPage
 
                     if (result == PasswordVerificationResult.Success)
                     {
-                        if (user.RoleId != Role)
+                        if (user.RoleId != Role)                                   //authorization
                         {
                             Message = "Du har ikke adgang til denne login.";
                             return Page();
@@ -172,14 +172,14 @@ namespace Zealand_lokale_booking.Pages.LogInPage
                             new Claim(ClaimTypes.Role, roleName)
                         };
 
-                        var claimsIdentity = new ClaimsIdentity(
+                        var claimsIdentity = new ClaimsIdentity(                    
                             claims,
                             CookieAuthenticationDefaults.AuthenticationScheme
                         );
                         
 
 
-                        await HttpContext.SignInAsync(
+                        await HttpContext.SignInAsync(     
                             CookieAuthenticationDefaults.AuthenticationScheme,
                             new ClaimsPrincipal(claimsIdentity)
                         );
@@ -191,7 +191,7 @@ namespace Zealand_lokale_booking.Pages.LogInPage
 
 
                         return RedirectToPage("/UserPage/UserDashBoard");
-                        //return RedirectToPage("/LogInPage/AdminDashBoard");
+                        //return RedirectToPage("/LogInPage/AdminDashBoard");         /* AccessDenied*/
                     }
                 }
             }

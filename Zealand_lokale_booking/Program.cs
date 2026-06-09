@@ -21,7 +21,7 @@ builder.Services.AddRazorPages();
 
 // User service
 
-//builder.Services.AddSingleton<JsonFileService>();                     //mock-json     //opretter ASP.NET obj
+//builder.Services.AddSingleton<JsonFileService>();                     //mock-json     //en hel app
 //builder.Services.AddScoped<IUserService, JsonUserService>();        //mock
 
 

@@ -167,7 +167,7 @@ namespace Zealand_lokale_booking.Pages.UserPage
             if (SearchId.HasValue)
             {
                 Users = allUsers
-                    .Where(u => u.UserId == SearchId.Value)
+                    .Where(u => u.UserId == SearchId.Value)                            /* Lambda expression = LINQ */
                     .ToList();
             }
             else
