@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{id:int}"
 @model Zealand_lokale_booking.Pages.UserPage.EditUserModel
 @{
 }
@@ -12,6 +12,7 @@
         </div>
 
         <div class="card-body">
+         
             <div class="text-center mb-3">
 
                 <img src="@Model.User.ImagePath"
@@ -22,37 +23,30 @@
             </div>
             <form method="post" enctype="multipart/form-data">
 
-                <input type="hidden" asp-for="User.UserId" />
-                <input type="hidden" asp-for="User.RoleId" />
+                <div class="form-group  mb-4">
+                    <label asp-for="User.UserId" class="control-label"></label>
+                    <input asp-for="User.UserId" class="form-control" readonly="@(true)" />
+                </div>
 
-                <!-- Navn -->
-                <div class="mb-3">
-                    <label class="form-label">
-                        <i class="fa fa-user me-1"></i>
-                        Navn
-                    </label>
+                <div class="form-group  mb-4">
+                    <label asp-for="User.Name" class="control-label"></label>
                     <input asp-for="User.Name" class="form-control" />
+                    <span asp-validation-for="User.Name" class="text-danger"></span>
                 </div>
 
-                <!-- Email -->
-                <div class="mb-3">
-                    <label class="form-label">
-                        <i class="fa fa-envelope me-1"></i>
-                        Email
-                    </label>
+                <div class="form-group  mb-4">
+                    <label asp-for="User.Email" class="control-label"></label>
                     <input asp-for="User.Email" class="form-control" />
+                    <span asp-validation-for="User.Email" class="text-danger"></span>
                 </div>
 
-                <!-- Adgangskode -->
-                <div class="mb-3">
-                    <label class="form-label">
-                        <i class="fa fa-lock me-1"></i>
-                        Adgangskode
-                    </label>
-                    <input asp-for="User.Password" class="form-control" />
+                <div class="form-group  mb-4">
+                    <label asp-for="NewPassword" class="control-label"></label>
+                    <input asp-for="NewPassword" class="form-control" />
+                    <span asp-validation-for="NewPassword" class="text-danger"></span>
                 </div>
                 <!-- Foto -->
-                <div class="mb-3">
+                <div class="form-group  mb-4">
 
                     <label class="form-label">
                         <i class="fa fa-image me-1"></i>
@@ -62,21 +56,17 @@
                     <input type="file"
                            asp-for="ImageFile"
                            class="form-control" />
-
-                </div>
-                <!-- Rolle (kun visning) -->
-                <div class="mb-3">
-                    <label class="form-label">
-                        <i class="fa fa-user-tag me-1"></i>
-                        Rolle
-                    </label>
-                    <input class="form-control"
-                           value="@Model.User.Role?.RoleName"
-                           disabled />
+                           </div>
+                <div class="form-group  mb-4">
+                    <label asp-for="User.RoleId" class="control-label"></label>
+                    <select asp-for="User.RoleId" class="form-control">
+                        <option value="2">Studerende</option>
+                        <option value="3">Underviser</option>
+                    </select>
                 </div>
 
                 <!-- Knapper -->
-                <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-between mt-3">
                     <a asp-page="/UserPage/GetAllUsers"
                        class="btn btn-secondary">
 

@@ -85,14 +85,25 @@ namespace Zealand_lokale_booking.Pages.UserPage
 
         public async Task<IActionResult> OnPostAsync()
         {
+
             if (!ModelState.IsValid)
                 return Page();
-
+            if (!string.IsNullOrWhiteSpace(User.Name))
+            {
+                User.Name = char.ToUpper(User.Name[0]) + User.Name.Substring(1).ToLower();
+            }
+            if (string.IsNullOrWhiteSpace(User.Password))
+            {
+                ModelState.AddModelError("User.Password",
+                    "Der skal angives en adgangskode.");
+                return Page();
+            }
             // Student
             if (User.RoleId == 2 &&
                 !User.Email.ToLower().EndsWith("@edu.zealand.dk"))
             {
-                ModelState.AddModelError("", "Studerende skal have en email der slutter med @edu.zealand.dk");
+                ModelState.AddModelError("User.Email",
+      "Studerende skal have en email der slutter med @edu.zealand.dk");
                 return Page();
             }
 
@@ -100,7 +111,7 @@ namespace Zealand_lokale_booking.Pages.UserPage
             if (User.RoleId == 3 &&
                 !User.Email.ToLower().EndsWith("@zealand.dk"))
             {
-                ModelState.AddModelError("", "Undervisere skal have en email der slutter med @zealand.dk");
+                ModelState.AddModelError("User.Email", "Undervisere skal have en email der slutter med @zealand.dk");
                 return Page();
             }
             if (ImageFile != null)

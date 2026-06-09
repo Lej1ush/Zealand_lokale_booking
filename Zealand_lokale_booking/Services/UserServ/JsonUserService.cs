@@ -8,21 +8,21 @@
 //    public class JsonUserService : IUserService
 //    {
 
-//        private List<User> _users;
+//        private List<User> _users;                                   //list at gemme
 
-//        private JsonFileService _json;
+//        private JsonFileService _json;                            //læs gem 
+//        private IUserRepository _userRepository;                    //db repo
 
-//        private UserRepository _userRepository;
 
-//        public JsonUserService(JsonFileService jsonFileService, UserRepository userRepository)
+//        public JsonUserService(JsonFileService jsonFileService, IUserRepository userRepository)               //DI
 //        {
-//            _json =  jsonFileService;
-
+//            _json = jsonFileService;
 //            _userRepository = userRepository;
 
-//            //_users = UserMock.GetUsers();
-
+//            _users = UserMock.GetUsers();
 //            _users = _json.GetAll().ToList();
+
+//            _userRepository.SaveUsers(_users);                        // gem i db
 
 //            _users = _userRepository.GetAll();
 //        }
@@ -31,15 +31,14 @@
 //        {
 //            _users.Add(user);
 
-//            _json.SaveAll(_users);
-
-//            _userRepository.Add(user);
+//            _json.SaveAll(_users);                                         
 //        }
 
 
 //        public List<User> GetAllUsers()
 //        {
-//            return _json.GetAll();                                // GetAll(): Method from JsonFileService 
+//            return _json.GetAll();                                // GetAll(): Method from JsonFileService =læs
+
 //        }
 
 //        public List<User> GetUsersByRole(int roleId)
@@ -47,11 +46,14 @@
 //            return _json.GetAll()
 //                .Where(u => u.RoleId == roleId)
 //                .ToList();
+
 //        }
 
 //        public User Login(string email, string password)
 //        {
 //            var user = _json.GetAll()
+
+
 //                .FirstOrDefault(u => u.Email == email);
 
 //            if (user == null)
@@ -75,20 +77,18 @@
 //        {
 //            var users = _json.GetAll();
 
+
 //            var passwordHasher = new PasswordHasher<string>();
-//            user.Password = passwordHasher.HashPassword(null, user.Password);
+//            user.Password = passwordHasher.HashPassword(null, user.Password);                  //hash password til json
 
 //            user.UserId = users.Any()
 //                ? users.Max(u => u.UserId) + 1
 //                : 1;
 
 //            users.Add(user);
-
 //            _json.SaveAll(users);
-//        }                                                                    // SaveAll(): Method from JsonFileService
 
-
-
+//        }
 
 //        public void UpdateUser(User user)
 //        {
@@ -111,19 +111,21 @@
 //            }
 
 //            _json.SaveAll(users);
+
 //        }
 
 //        public void DeleteUser(int id)
 //        {
 //            var users = _json.GetAll();
-
 //            var user = users.FirstOrDefault(u => u.UserId == id);
 
 //            if (user != null)
 //                users.Remove(user);
 
 //            _json.SaveAll(users);
+
 //        }
+
 //    }
 //}
 
@@ -140,11 +142,13 @@ namespace Zealand_lokale_booking.Services.UserServ
     {
         private readonly IUserRepository _userRepository;
 
+
         public JsonUserService(IUserRepository userRepository)
         {
             _userRepository = userRepository;
+            
         }
-
+  
         public async Task<List<User>> GetAllUsersAsync()
         {
             return await _userRepository.GetAllAsync();
@@ -164,14 +168,14 @@ namespace Zealand_lokale_booking.Services.UserServ
         public async Task<User?> LoginAsync(string email, string password)
         {
             var user = await _userRepository
-                .GetByEmailAsync(email);
+                .GetByEmailAsync(email);                                             //tjek user from db
 
             if (user == null)
                 return null;
 
             var passwordHasher = new PasswordHasher<string>();
 
-            var result = passwordHasher.VerifyHashedPassword(
+            var result = passwordHasher.VerifyHashedPassword(                               
                 null,
                 user.Password,
                 password
@@ -190,12 +194,10 @@ namespace Zealand_lokale_booking.Services.UserServ
 
             var passwordHasher = new PasswordHasher<string>();
 
-            user.Password = passwordHasher
+            user.Password = passwordHasher                                                       //hashed
                 .HashPassword(null, user.Password);
 
-            user.UserId = users.Any()
-                ? users.Max(u => u.UserId) + 1
-                : 1;
+
 
             await _userRepository.AddAsync(user);
 

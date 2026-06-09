@@ -81,3 +81,22 @@ main {
     color: #6b7280;
     margin-bottom: 35px;
 }
+
+.position-relative {
+    width: 100%;
+}
+
+.password-eye {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 10;
+}
+
+#passwordField {
+    width: 100%;
+    padding-right: 45px;
+}
+

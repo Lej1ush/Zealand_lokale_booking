@@ -12,56 +12,55 @@
         </div>
 
         <div class="card-body">
-            <div asp-validation-summary="All" class="text-danger mb-3"></div>
+          
 
             <form method="post" enctype="multipart/form-data">
 
                 <!-- Navn -->
-                <div class="mb-3">
-                    <label class="form-label">Navn</label>
-                    <input asp-for="User.Name" class="form-control" required />
+                <div class="form-group  mb-4">
+                    <label asp-for="User.Name" class="control-label"></label>
+                    <input asp-for="User.Name" class="form-control" />
+                    <span asp-validation-for="User.Name" class="text-danger"></span>
                 </div>
 
                 <!-- Email -->
-                <div class="mb-3">
-                    <label class="form-label">Email</label>
-                    <input asp-for="User.Email" class="form-control" required />
-                    <small class="text-muted">
+                <div class="form-group mb-4">
+                    <label asp-for="User.Email" class="control-label"></label>
+                    <input asp-for="User.Email" class="form-control" />
+
+                    <small class="text-muted d-block">
                         Studerende: @@edu.zealand.dk | Undervisere: @@zealand.dk
                     </small>
+
+                    <span asp-validation-for="User.Email" class="text-danger d-block"></span>
                 </div>
 
                 <!-- Adgangskode -->
-                <div class="mb-3">
-                    <label class="form-label">Adgangskode</label>
-                    <input asp-for="User.Password" class="form-control" required />
+                <div class="form-group  mb-4">
+                    <label asp-for="User.Password" class="control-label"></label>
+                    <input asp-for="User.Password" class="form-control" />
+                    <span asp-validation-for="User.Password" class="text-danger"></span>
                 </div>
                 <!-- Foto -->
-                <div class="mb-3">
-
-                    <label class="form-label">
-                        <i class="fa fa-image me-1"></i>
-                        Foto
-                    </label>
-
-                    <input type="file"
-                           asp-for="ImageFile"
-                           class="form-control" />
-
+                <div class="form-group  mb-4">
+                    <label asp-for="ImageFile" class="control-label"></label>
+                    <input asp-for="ImageFile" type="file" class="form-control" />
                 </div>
                 <!-- Rolle -->
-                <div class="mb-3">
-                    <select asp-for="User.RoleId" class="form-select">
+                <div class="form-group  mb-4">
+                    <label asp-for="User.RoleId" class="control-label"></label>
 
-                        <option value="">Vælg rolle</option>
-                        <option value="3">Underviser</option>
+                    <select asp-for="User.RoleId" class="form-control">
+                        <option value="0">Vælg rolle</option>
                         <option value="2">Studerende</option>
-
+                        <option value="3">Underviser</option>
                     </select>
+
+                    <span asp-validation-for="User.RoleId" class="text-danger"></span>
                 </div>
 
                 <!-- Knapper -->
-                <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-between mt-3">
                     <a asp-page="/UserPage/GetAllUsers" class="btn btn-secondary">
                         <i class="fa fa-times me-1"></i> Annuller</a>
 
@@ -72,4 +71,4 @@
             </form>
         </div>
     </div>
-    </div>
+ 

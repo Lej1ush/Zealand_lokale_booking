@@ -68,6 +68,8 @@ namespace Zealand_lokale_booking.Pages.UserPage
         public User User { get; set; }
         [BindProperty]
         public IFormFile? ImageFile { get; set; }
+        [BindProperty]
+        public string? NewPassword { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
@@ -80,10 +82,19 @@ namespace Zealand_lokale_booking.Pages.UserPage
                 return RedirectToPage("/UserPage/GetAllUsers");
             }
 
+            User.Password = "";
+
             return Page();
         }
         public async Task<IActionResult> OnPostAsync()
         {
+            ModelState.Remove("User.Password");
+
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+
             var users = await _userService.GetUsersWithRolesAsync();
 
             var existingUser = users.FirstOrDefault(u => u.UserId == User.UserId);
@@ -92,12 +103,33 @@ namespace Zealand_lokale_booking.Pages.UserPage
             {
                 return RedirectToPage("/UserPage/GetAllUsers");
             }
+            if (User.RoleId == 2 &&
+    !User.Email.ToLower().EndsWith("@edu.zealand.dk"))
+            {
+                ModelState.AddModelError("User.Email", "Studerende skal have en email der slutter med @edu.zealand.dk");
+                return Page();
+            }
 
+            if (User.RoleId == 3 &&
+                !User.Email.ToLower().EndsWith("@zealand.dk"))
+            {
+                ModelState.AddModelError("User.Email", "Undervisere skal have en email der slutter med @zealand.dk");
+                return Page();
+            }
+            if (!string.IsNullOrWhiteSpace(User.Name))
+            {
+                User.Name = char.ToUpper(User.Name[0]) +
+                            User.Name.Substring(1).ToLower();
+            }
             existingUser.Name = User.Name;
             existingUser.Email = User.Email;
-            existingUser.Password = User.Password;
             existingUser.RoleId = User.RoleId;
-            existingUser.ImagePath = User.ImagePath;
+
+
+            if (!string.IsNullOrWhiteSpace(NewPassword))
+            {
+                existingUser.Password = NewPassword;
+            }
 
             if (ImageFile != null)
             {
@@ -106,7 +138,7 @@ namespace Zealand_lokale_booking.Pages.UserPage
 
                 string folder = Path.Combine(
                     Directory.GetCurrentDirectory(),
-                    "wwwroot/Photo");
+                    "wwwroot/images/users");
 
                 string filePath = Path.Combine(folder, fileName);
 
@@ -114,8 +146,7 @@ namespace Zealand_lokale_booking.Pages.UserPage
                 {
                     await ImageFile.CopyToAsync(stream);
                 }
-
-                existingUser.ImagePath = "/Photo/" + fileName;
+                existingUser.ImagePath = "/images/users/" + fileName;
             }
             await _userService.UpdateUserAsync(existingUser);
 

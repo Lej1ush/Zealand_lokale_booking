@@ -130,7 +130,14 @@ namespace Zealand_lokale_booking.Pages.LogInPage
         public int? Role { get; set; }
 
         public string Message { get; set; } = "";
-
+        /// <summary>
+        /// Logger brugeren ind ved at kontrollere email, adgangskode og rolle.
+        /// Opretter derefter cookie authentication og redirecter til dashboard.
+        /// </summary>
+        /// <returns>
+        /// Redirect til AdminDashboard eller UserDashboard.
+        /// Hvis login fejler, returneres den samme side med en fejlmeddelelse.
+        /// </returns>
         public async Task<IActionResult> OnPostAsync()
         {
             List<User> users = await _userService.GetUsersWithRolesAsync();
@@ -157,7 +164,7 @@ namespace Zealand_lokale_booking.Pages.LogInPage
 
                         string roleName = user.Role?.RoleName ?? "User";
 
-                        var claims = new List<Claim>
+                        var claims = new List<Claim>             //Claims indeholder oplysninger om den loggede bruger
                         {
                             new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
                             new Claim(ClaimTypes.Name, user.Name),
@@ -169,6 +176,8 @@ namespace Zealand_lokale_booking.Pages.LogInPage
                             claims,
                             CookieAuthenticationDefaults.AuthenticationScheme
                         );
+                        
+
 
                         await HttpContext.SignInAsync(
                             CookieAuthenticationDefaults.AuthenticationScheme,
@@ -180,7 +189,9 @@ namespace Zealand_lokale_booking.Pages.LogInPage
                             return RedirectToPage("/LogInPage/AdminDashBoard");
                         }
 
+
                         return RedirectToPage("/UserPage/UserDashBoard");
+                        //return RedirectToPage("/LogInPage/AdminDashBoard");
                     }
                 }
             }

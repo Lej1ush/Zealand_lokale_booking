@@ -78,7 +78,7 @@ namespace Zealand_lokale_booking.Pages.UserPage
 
             return Page();
         }
-
+      
         public async Task<IActionResult> OnPostAsync()
         {
             await _userService.DeleteUserAsync(User.UserId);

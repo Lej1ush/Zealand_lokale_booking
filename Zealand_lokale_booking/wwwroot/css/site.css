@@ -158,15 +158,19 @@ body {
 }
 
 .dashboard-card {
-    width: 220px;
-    padding: 25px;
-    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 220px;
+    border-radius: 20px;
     text-align: center;
-    color: white;
     text-decoration: none;
-    font-weight: 500;
-    transition: all 0.3s ease;
+    color: white;
+    padding: 30px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    min-height: 180px;
 }
 
     .dashboard-card .icon {

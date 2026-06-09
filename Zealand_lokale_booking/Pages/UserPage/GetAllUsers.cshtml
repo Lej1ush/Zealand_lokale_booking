@@ -10,13 +10,17 @@
 
         <h2 class="mb-4">
 
-            @if (User.IsInRole("Admin"))
+            @if (Model.Role == null)
             {
                 <text>Alle brugere</text>
             }
-            else if (User.IsInRole("Teacher"))
+            else if (Model.Role == 2)
             {
                 <text>Studerende</text>
+            }
+            else if (Model.Role == 3)
+            {
+                <text>Undervisere</text>
             }
 
         </h2>
@@ -106,17 +110,15 @@
                                 <span class="ms-1">
 
                                     <a asp-page-handler="SortById"
+                                       asp-route-role="@Model.Role"
                                        class="text-white text-decoration-none small">
-
                                         <i class="fa fa-sort-up"></i>
-
                                     </a>
 
                                     <a asp-page-handler="SortByIdDesc"
+                                       asp-route-role="@Model.Role"
                                        class="text-white text-decoration-none small ms-1">
-
                                         <i class="fa fa-sort-down"></i>
-
                                     </a>
 
                                 </span>
@@ -134,17 +136,14 @@
                                 <span class="ms-1">
 
                                     <a asp-page-handler="SortByName"
+                                       asp-route-role="@Model.Role"
                                        class="text-white text-decoration-none small">
-
                                         <i class="fa fa-sort-up"></i>
-
                                     </a>
-
                                     <a asp-page-handler="SortByNameDesc"
+                                       asp-route-role="@Model.Role"
                                        class="text-white text-decoration-none small ms-1">
-
                                         <i class="fa fa-sort-down"></i>
-
                                     </a>
 
                                 </span>
