@@ -73,6 +73,8 @@ builder.Services.AddMvc()
 
 var app = builder.Build();
 
+app.UseDeveloperExceptionPage();
+
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
@@ -85,12 +87,11 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseStaticFiles(); 
 
-app.MapStaticAssets();
 
-app.MapRazorPages()
-    .WithStaticAssets();
-
+app.MapRazorPages();
+ 
 /*
  using (var scope = app.Services.CreateScope())
    {
